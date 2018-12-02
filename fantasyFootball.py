@@ -119,12 +119,11 @@ class LoginWidget(QtWidgets.QWidget): # Login Widget to login user
         self.setLayout(self.box_layout)
         self.show()
  
-    @pyqtSlot()
     def login_click(self):
         self.Login_Username = self.loginUserTextbox.text()
         self.Login_Password = self.loginPassTextbox.text()
 
-        # By passing database checking REMEMBER TO REMOVE
+        # By passing database checking REMEMBER TO 
         # self.parent().setCurrentIndex(HOME)
         
         if self.Login_Username != "" and self.Login_Password != "":
@@ -167,13 +166,12 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
         self.setLayout(self.box_layout)
         self.show()
  
-    @pyqtSlot()
     def register_click(self):
         self.Register_Username = self.regUserTextbox.text()
         self.Register_Password = self.regPassTextbox.text()
 
         # By passing database checking REMEBER TO REMOVE
-        self.parent().setCurrentIndex(LOGIN_REGISTER)
+        #self.parent().setCurrentIndex(LOGIN_REGISTER)
         
         if self.Register_Username!=None and self.Register_Password !=None:
             self.regUsrPassDict = {'username' : self.Register_Username, 'password' : self.Register_Password}
@@ -182,8 +180,8 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
             print(r.text)
             self.parent().setCurrentIndex(HOME)
         
-        self.regUserTextbox.setText("")
-        self.regPassTextbox.setText("")
+        self.regUserTextbox=""
+        self.regPassTextbox=""
 
 
 
@@ -210,6 +208,10 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
         self.current_button = QtWidgets.QPushButton("Current Match", self)
         self.current_button.setFixedSize(280, 40)
         self.current_button.clicked.connect(self.current_click)
+
+        # Logout Button
+        self.logout_button = QtWidgets.QPushButton("Logout", self)
+        self.logout_button.clicked.connect(self.logout_click)
 
         # Adding buttons to layout
         self.box_layout.addWidget(self.create_button)
@@ -241,6 +243,10 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
 
     def current_click(self):
         self.garbage = 0
+        
+    def logout_click(self):
+        self.parent().setCurrentIndex(LOGIN_REGISTER)
+        #LEAVE USER SESSION CODE HERE *********!!!!!!!!!!
 
 
 class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
@@ -270,21 +276,20 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.setLayout(self.box_layout)
         self.show()
  
-    @pyqtSlot()
     def create_click(self):
         self.Create_Match_Title = self.createMatchTextbox.text()
 
         # By passing database checking REMEMBER TO REMOVE
-        self.parent().setCurrentIndex(HOME)
+        #self.parent().setCurrentIndex(HOME)
         
         if self.Create_Match_Title!="":
-            # self.regUsrPassDict = {'username' : self.Register_Username, 'password' : self.Register_Password}
+            self.matchTitle = {'match' : self.Create_Match_Title}
             headers = {'Content-type' : 'application/json'}
-            r = s.post(url = url3, headers=headers, data=json.dumps(self.Create_Match_Title))
+            r = s.post(url = url3, headers=headers, data=json.dumps(self.matchTitle))
             print(r.text)
             self.parent().setCurrentIndex(HOME)
         
-        self.Create_Match_Title.setText("")
+        self.Create_Match_Title = ""
 
 
 
