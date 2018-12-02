@@ -274,6 +274,12 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.box_layout.addWidget(self.createMatchBtn)
         
         self.setLayout(self.box_layout)
+        
+        # Back button for create page, back to home page.
+        self.BackButton = QPushButton('Back', self)
+        self.BackButton.move(20, 100)
+        self.BackButton.clicked.connect(self.back_click)
+
         self.show()
  
     def create_click(self):
@@ -290,6 +296,9 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
             self.parent().setCurrentIndex(HOME)
         
         self.Create_Match_Title = ""
+        
+    def back_click(self):
+        self.parent().setCurrentIndex(HOME)
 
 
 
