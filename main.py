@@ -4,6 +4,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
+# Global Variables for stack index
 LOGIN_REGISTER = 0
 HOME = 1
 
