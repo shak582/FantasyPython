@@ -5,16 +5,16 @@ from PyQt5 import QtWidgets, QtGui, QtWidgets
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
+
 LOGIN_REGISTER = 0
 HOME = 1
 REGISTER = 2
 LOGIN = 3
 CREATE = 4
-JOIN = 5
 
 url = 'http://shak582.com:5000/register'
 url1 = 'http://shak582.com:5000/login'
-#url3 = "Create Matches Database"
+url3 = 'http://shak582.com:5000/creatematch'
 s = requests.session()
 
 
@@ -24,7 +24,6 @@ s = requests.session()
 # 2 - RegisterWidget
 # 3 - LoginWidget
 # 4 - CreateWidget
-# 5 - JoinWidget
 
 class MainWindow(QtWidgets.QMainWindow):  # Main Window
     def __init__(self):
@@ -44,7 +43,6 @@ class MainWindow(QtWidgets.QMainWindow):  # Main Window
         self.register_page = RegisterWidget(self)
         self.login_page = LoginWidget(self)
         self.create_page = CreateWidget(self)
-        self.join_page = JoinWidget(self)
 
         # Adding to stack; Pages indexed in order of addition
         self.PageStack.addWidget(self.main_page) # Index 0
@@ -52,7 +50,6 @@ class MainWindow(QtWidgets.QMainWindow):  # Main Window
         self.PageStack.addWidget(self.register_page) # Index 2
         self.PageStack.addWidget(self.login_page) # Index 3
         self.PageStack.addWidget(self.create_page) # Index 4
-        self.PageStack.addWidget(self.join_page) # Index 5
 
         self.setCentralWidget(self.PageStack)
         self.show()
@@ -119,17 +116,16 @@ class LoginWidget(QtWidgets.QWidget): # Login Widget to login user
         self.Login_Password = self.loginPassTextbox.text()
 
         #By passing database checking REMEBER TO REMOVE
-        self.parent().setCurrentIndex(HOME)
-        '''
+        #self.parent().setCurrentIndex(HOME)
+        
         if self.Login_Username!="" and self.Login_Password !="":
             self.loginUsrPassDict = {'username' : self.Login_Username, 'password' : self.Login_Password}
             headers = {'Content-type' : 'application/json'}
             r = s.post(url = url1, headers=headers, data=json.dumps(self.loginUsrPassDict))
             print(r.text)
             if r.text == "success":
-                print ("Succesful")
                 self.parent().setCurrentIndex(HOME)
-        '''
+        
         self.loginUserTextbox.setText("")
         self.loginPassTextbox.setText("")
 
@@ -165,46 +161,17 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
 
         #By passing database checking REMEBER TO REMOVE
         self.parent().setCurrentIndex(LOGIN_REGISTER)
-        '''
-        if self.Register_Username!="" and self.Register_Password !="":
+        
+        if self.Register_Username!=None and self.Register_Password !=None:
             self.regUsrPassDict = {'username' : self.Register_Username, 'password' : self.Register_Password}
             headers = {'Content-type' : 'application/json'}
             r = s.post(url = url, headers=headers, data=json.dumps(self.regUsrPassDict))
             print(r.text)
             self.parent().setCurrentIndex(HOME)
-        '''
+        
         self.regUserTextbox.setText("")
         self.regPassTextbox.setText("")
 
-'''
-    def login_click(self):
-        self.username = QInputDialog.getText(self, 'Login', 'Enter your username:')
-        self.password = QInputDialog.getText(self, 'Login', 'Enter your password:')
-        
-        if self.username[1] and self.password[1]:
-            self.username = self.username[0]
-            self.password = self.password[0]
-            self.loginUsrPassDict = {'username' : self.username, 'password' : self.password}
-            headers = {'Content-type' : 'application/json'}
-            r = s.post(url = url1, headers=headers, data=json.dumps(self.loginUsrPassDict))
-            print(r.text)
-            if r.text == "success":
-                print ("Succesful")
-                self.parent().setCurrentIndex(HOME)
-'''
-'''
-    def register_click(self):
-        self.inputRegUser = QInputDialog.getText(self, 'Register', 'Enter Username')
-        self.inputRegPass = QInputDialog.getText(self, 'Register', 'Enter Password')
-        
-        if self.inputRegUser[1] and self.inputRegPass[1]:
-            self.RegUsername = self.inputRegUser[0]
-            self.RegPass = self.inputRegPass[0]
-            self.regUsrPassDict = {'username' : self.RegUsername, 'password' : self.RegPass}
-            headers = {'Content-type' : 'application/json'}
-            r = s.post(url = url, headers=headers, data=json.dumps(self.regUsrPassDict))
-            print(r.text)
-'''
 
 
 class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
@@ -238,7 +205,22 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
         self.parent().setCurrentIndex(CREATE)
 
     def join_click(self):
-        self.parent().setCurrentIndex(JOIN)
+        class MatchList(QListWidget):
+            def __init__(self):
+                QListWidget.__init__(self)
+                self.add_matches()
+                self.itemClicked.connect(self.match_click)
+
+            def add_matches(self):
+                for match_text in ['Match1', 'Match2', 'Match3']:
+                    match = QListWidgetItem(match_text)
+                    self.addItem(match)
+
+            def match_click(self, match):
+                print (str(match.text()))
+
+        self.matchlist = MatchList()
+        self.matchlist.show()
 
     def current_click(self):
         self.garbage = 0
@@ -271,52 +253,15 @@ class CreateWidget(QtWidgets.QWidget): # CreateWidget for creating match
 
         #By passing database checking REMEBER TO REMOVE
         self.parent().setCurrentIndex(HOME)
-        '''
+        
         if self.Create_Match_Title!="":
             #self.regUsrPassDict = {'username' : self.Register_Username, 'password' : self.Register_Password}
             headers = {'Content-type' : 'application/json'}
             r = s.post(url = url3, headers=headers, data=json.dumps(self.Create_Match_Title))
             print(r.text)
             self.parent().setCurrentIndex(HOME)
-        '''
+        
         self.Create_Match_Title.setText("")
-
-class JoinWidget(QtWidgets.QWidget): # JoingWidget for joining match
-    def __init__(self, parent):
-        QtWidgets.QWidget.__init__(self, parent)
-        self.setup()
-
-    def setup(self):
-        # Our Layout
-        self.box_layout = QtWidgets.QVBoxLayout()
-        self.match_List = MatchList()
-
-class MatchList(QListWidget):
-    def __init__(self):
-        QListWidget.__init__(self)
-        self.add_items()
-        self.itemClicked.connect(self.match_click)
-
-    def add_items(self):
-        #change with list of matches in database
-        for match in ['Match_Name1', 'Match_Name2', 'Match_Name3']:
-            Match = QListWidgetItem(match)
-            self.addItem(Match)
-
-    def match_click(self, item):
-        # Update that matches players in DATABASE by 1 if players < 2.
-        # Else Print Match is Full (Easier implementation than adding additional "empty"/"full" flag into match struct) 
-        print (str(item.text()))
-
-
-
-
-
-
-
-
-
-
 
 
 
