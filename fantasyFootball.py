@@ -10,10 +10,54 @@ LOGIN_REGISTER = 0
 HOME = 1
 REGISTER = 2
 LOGIN = 3
+CREATE = 4
+JOIN = 5
 
 url = 'http://shak582.com:5000/register'
 url1 = 'http://shak582.com:5000/login'
+#url3 = "Create Matches Database"
 s = requests.session()
+
+
+# INDEXES FOR STACK
+# 0 - LoginRegisterWidget
+# 1 - HomeWidget
+# 2 - RegisterWidget
+# 3 - LoginWidget
+# 4 - CreateWidget
+# 5 - JoinWidget
+
+class MainWindow(QtWidgets.QMainWindow):  # Main Window
+    def __init__(self):
+        QtWidgets.QMainWindow.__init__(self)
+        self.setup()
+
+    def setup(self):
+        self.setGeometry(0, 0, 700, 700)
+        self.setFixedSize(700, 700)  # eliminating resizing
+        self.setWindowTitle("Fantasy Football")
+
+        self.PageStack = QStackedWidget(self)
+
+        # Creating our pages for the stack
+        self.main_page = LoginRegisterWidget(self)
+        self.home_page = HomeWidget(self)
+        self.register_page = RegisterWidget(self)
+        self.login_page = LoginWidget(self)
+        self.create_page = CreateWidget(self)
+        self.join_page = JoinWidget(self)
+
+        # Adding to stack; Pages indexed in order of addition
+        self.PageStack.addWidget(self.main_page) # Index 0
+        self.PageStack.addWidget(self.home_page) # Index 1
+        self.PageStack.addWidget(self.register_page) # Index 2
+        self.PageStack.addWidget(self.login_page) # Index 3
+        self.PageStack.addWidget(self.create_page) # Index 4
+        self.PageStack.addWidget(self.join_page) # Index 5
+
+        self.setCentralWidget(self.PageStack)
+        self.show()
+
 
 # To change between Pages - self.parent().setCurrentIndex(HOME)
 #          Changes depending on what you want to switch to ^
@@ -45,7 +89,7 @@ class LoginRegisterWidget(QtWidgets.QWidget):  # Normal LoginPage
     def login_click(self):
         self.parent().setCurrentIndex(LOGIN)
 
-class LoginWidget(QtWidgets.QWidget): # RegisterWidget for registering user
+class LoginWidget(QtWidgets.QWidget): # Login Widget to login user
     def __init__(self, parent):
         QtWidgets.QWidget.__init__(self, parent)
         self.setup()
@@ -67,11 +111,11 @@ class LoginWidget(QtWidgets.QWidget): # RegisterWidget for registering user
         self.loginBtn.move(20,140)
  
         # connect button to function on_click
-        self.loginBtn.clicked.connect(self.on_click)
+        self.loginBtn.clicked.connect(self.login_click)
         self.show()
  
     @pyqtSlot()
-    def on_click(self):
+    def login_click(self):
         self.Login_Username = self.loginUserTextbox.text()
         self.Login_Password = self.loginPassTextbox.text()
 
@@ -103,7 +147,6 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
         self.regUserTextbox = QLineEdit(self)
         self.regUserTextbox.move(20, 20)
         self.regUserTextbox.resize(280,40)
- 
 
         self.regPassTextbox = QLineEdit(self)
         self.regPassTextbox.move(20, 80)
@@ -113,11 +156,11 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
         self.registerBtn.move(20,140)
  
         # connect button to function on_click
-        self.registerBtn.clicked.connect(self.on_click)
+        self.registerBtn.clicked.connect(self.register_click)
         self.show()
  
     @pyqtSlot()
-    def on_click(self):
+    def register_click(self):
         self.Register_Username = self.regUserTextbox.text()
         self.Register_Password = self.regPassTextbox.text()
 
@@ -133,9 +176,6 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
         '''
         self.regUserTextbox.setText("")
         self.regPassTextbox.setText("")
-
-
-
 
 '''
     def login_click(self):
@@ -196,44 +236,90 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
         self.setLayout(self.box_layout)
 
     def create_click(self):
-        self.inputCreateMatch = QInputDialog.getText(self, 'Match Name', 'Create Match')
+        self.parent().setCurrentIndex(CREATE)
 
     def join_click(self):
-        self.inputFindMatch = QInputDialog.getText(self, 'Match Name', 'Find Match')
+        self.parent().setCurrentIndex(JOIN)
 
     def current_click(self):
         self.garbage = 0
 
-# INDEXES FOR STACK
-# 0 - LoginRegisterWidget
-# 1 - HomeWidget
-
-class MainWindow(QtWidgets.QMainWindow):  # Main Window
-    def __init__(self):
-        QtWidgets.QMainWindow.__init__(self)
+class CreateWidget(QtWidgets.QWidget): # CreateWidget for creating match
+    def __init__(self, parent):
+        QtWidgets.QWidget.__init__(self, parent)
         self.setup()
 
     def setup(self):
-        self.setGeometry(0, 0, 700, 700)
-        self.setFixedSize(700, 700)  # eliminating resizing
-        self.setWindowTitle("Fantasy Football")
+        # Our Layout
+        self.box_layout = QtWidgets.QVBoxLayout()
 
-        self.PageStack = QStackedWidget(self)
+        self.createMatchTextbox = QLineEdit(self)
+        self.createMatchTextbox.move(20, 20)
+        self.createMatchTextbox.resize(280,40)
 
-        # Creating our pages for the stack
-        self.main_page = LoginRegisterWidget(self)
-        self.home_page = HomeWidget(self)
-        self.register_page = RegisterWidget(self)
-        self.login_page = LoginWidget(self)
 
-        # Adding to stack; Pages indexed in order of addition
-        self.PageStack.addWidget(self.main_page) # Index 0
-        self.PageStack.addWidget(self.home_page) # Index 1
-        self.PageStack.addWidget(self.register_page) # Index 2
-        self.PageStack.addWidget(self.login_page) # Index 3
-
-        self.setCentralWidget(self.PageStack)
+        # Create a button in the window
+        self.createMatchBtn = QPushButton('Create Match', self)
+        self.createMatchBtn.move(20,80)
+ 
+        # connect button to function on_click
+        self.createMatchBtn.clicked.connect(self.create_click)
         self.show()
+ 
+    @pyqtSlot()
+    def create_click(self):
+        self.Create_Match_Title = self.createMatchTextbox.text()
+
+        #By passing database checking REMEBER TO REMOVE
+        self.parent().setCurrentIndex(HOME)
+        '''
+        if self.Create_Match_Title!="":
+            #self.regUsrPassDict = {'username' : self.Register_Username, 'password' : self.Register_Password}
+            headers = {'Content-type' : 'application/json'}
+            r = s.post(url = url3, headers=headers, data=json.dumps(self.Create_Match_Title))
+            print(r.text)
+            self.parent().setCurrentIndex(HOME)
+        '''
+        self.Create_Match_Title.setText("")
+
+class JoinWidget(QtWidgets.QWidget): # JoingWidget for joining match
+    def __init__(self, parent):
+        QtWidgets.QWidget.__init__(self, parent)
+        self.setup()
+
+    def setup(self):
+        # Our Layout
+        self.box_layout = QtWidgets.QVBoxLayout()
+        self.match_List = MatchList()
+
+class MatchList(QListWidget):
+    def __init__(self):
+        QListWidget.__init__(self)
+        self.add_items()
+        self.itemClicked.connect(self.match_click)
+
+    def add_items(self):
+        #change with list of matches in database
+        for match in ['Match_Name1', 'Match_Name2', 'Match_Name3']:
+            Match = QListWidgetItem(match)
+            self.addItem(Match)
+
+    def match_click(self, item):
+        # Update that matches players in DATABASE by 1 if players < 2.
+        # Else Print Match is Full (Easier implementation than adding additional "empty"/"full" flag into match struct) 
+        print (str(item.text()))
+
+
+
+
+
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
