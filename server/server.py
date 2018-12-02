@@ -12,39 +12,23 @@ app.config['SESSION_TYPE'] = 'filesystem'
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 #app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 Session(app)
+#db.init_app(db)
 
-games = nflgame.games(2017, week=[x for x in range(1, 18)])
-players = nflgame.combine_game_stats(games)
+# games = nflgame.games(2017, week=[x for x in range(1, 18)])
+# players = nflgame.combine_game_stats(games)
 
-passing = [x for x in players.passing()]
-players = nflgame.combine_game_stats(games)
-rushing = [x for x in players.rushing()]
-players = nflgame.combine_game_stats(games)
-receiver = [x for x in players.receiving()]
-players = nflgame.combine_game_stats(games)
-kicking = [x for x in players.kicking()]
+# passing = [x for x in players.passing()]
+# players = nflgame.combine_game_stats(games)
+# rushing = [x for x in players.rushing()]
+# players = nflgame.combine_game_stats(games)
+# receiver = [x for x in players.receiving()]
+# players = nflgame.combine_game_stats(games)
+# kicking = [x for x in players.kicking()]
 
-# for x in passing:
-# 	print x, ' ',
 
-# print '################'
 
-rushing = set(rushing) - set(passing)
+# rushing = set(rushing) - set(passing)
 
-# for x in rushing:
-# 	print x, ' ',
-
-# print '###################'
-
-# for x in receiver:
-# 	print x, ' ',
-
-# print '######################'
-
-# for x in kicking:
-# 	print x, ' ',
-
-# print '#####################'
 
 #USER STUFF##########################################
 @app.route('/login', methods=['POST'])
@@ -88,6 +72,12 @@ def register():
 def getusername():
 	return session['username']
 
+@app.route('/exit', methods=['GET'])
+def exits():
+	if 'username' in session:
+		del session['username']
+	return 'success'
+
 #MATCH STUFF################################################
 @app.route('/creatematch', methods=['POST'])
 def createMatch():
@@ -98,7 +88,7 @@ def createMatch():
 			m = Match()
 			m.match = req_data['match']
 			m.player1 = session['username']
-			m.state = 'QB1'
+			m.state = '1QB'
 			db.session.add(m)
 			db.session.commit()
 			return jsonify({'success' : 'right shit'})
@@ -122,11 +112,26 @@ def joinMatch():
 			return jsonify({'error' : 'match dont exist'})
 	return jsonify({'sucess' : 'good shit'})
 
-@app.route('/draftplayer', methods=['POST'])
-def draftplayer():
-	req_data = request.get_json()
-	if 'match' in req_data and 'player' in req_data:
-		try:
+@app.route('/getallmatches', methods=['GET'])
+def getAllMatches():
+	ms = Match.query.all()
+	s = ''
+	for x in ms:
+		s += x + '\n'
+	return s
+
+
+# @app.route('/draftplayer', methods=['POST'])
+# def draftplayer():
+# 	req_data = request.get_json()
+# 	if 'match' in req_data and 'player' in req_data:
+# 		try:
+# 			m = Match.query.filter_by(req_data['match'])
+# 			if not m:
+# 				return 'error no match like that exists'
+
+# 		except Exception:
+# 			return 'error'
 
 
 
