@@ -6,6 +6,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 #created new button
+#another button2
 LOGIN_REGISTER = 0
 HOME = 1
 REGISTER = 2
