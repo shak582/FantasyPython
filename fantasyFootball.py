@@ -17,9 +17,6 @@ url1 = 'http://shak582.com:5000/login'
 url3 = 'http://shak582.com:5000/creatematch'
 s = requests.session()
 
-#ISTHISHITWORKING?
-
-
 # INDEXES FOR STACK
 # 0 - LoginRegisterWidget
 # 1 - HomeWidget
