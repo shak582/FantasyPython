@@ -94,6 +94,7 @@ class LoginWidget(QtWidgets.QWidget): # Login Widget to login user
         self.setup()
 
     def setup(self):
+        #test
         # Our Layout
         self.box_layout = QtWidgets.QVBoxLayout()
         self.box_layout.setAlignment(Qt.AlignCenter)
@@ -184,7 +185,6 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
         self.regPassTextbox=""
 
 
-
 class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
     def __init__(self, parent):
         QtWidgets.QWidget.__init__(self, parent)
@@ -247,6 +247,22 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
     def logout_click(self):
         self.parent().setCurrentIndex(LOGIN_REGISTER)
         #LEAVE USER SESSION CODE HERE *********!!!!!!!!!!
+        class MatchList(QListWidget):
+            def __init__(self):
+                QListWidget.__init__(self)
+                self.add_matches()
+                self.itemClicked.connect(self.match_click)
+
+            def add_matches(self):
+                for match_text in ['Match1', 'Match2', 'Match3']:
+                    match = QListWidgetItem(match_text)
+                    self.addItem(match)
+
+            def match_click(self, match):
+                print (str(match.text()))
+
+        self.matchlist = MatchList()
+        self.matchlist.show()
 
 
 class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
@@ -272,7 +288,7 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         # Adding Widgets to Box Layout
         self.box_layout.addWidget(self.createMatchTextbox)
         self.box_layout.addWidget(self.createMatchBtn)
-        
+
         self.setLayout(self.box_layout)
         
         # Back button for create page, back to home page.
