@@ -11,10 +11,11 @@ HOME = 1
 REGISTER = 2
 LOGIN = 3
 CREATE = 4
+MATCH = 5
 
-url = 'http://shak582.com:5000/register'
-url1 = 'http://shak582.com:5000/login'
-url3 = 'http://shak582.com:5000/creatematch'
+url = 'http://162.243.35.210:5000/register'
+url1 = 'http://162.243.35.210:5000/login'
+url3 = 'http://162.243.35.210:5000/creatematch'
 s = requests.session()
 
 # INDEXES FOR STACK
@@ -23,6 +24,7 @@ s = requests.session()
 # 2 - RegisterWidget
 # 3 - LoginWidget
 # 4 - CreateWidget
+# 5 - MatchWidget
 
 class MainWindow(QtWidgets.QMainWindow):  # Main Window
     def __init__(self):
@@ -42,6 +44,7 @@ class MainWindow(QtWidgets.QMainWindow):  # Main Window
         self.register_page = RegisterWidget(self)
         self.login_page = LoginWidget(self)
         self.create_page = CreateWidget(self)
+        self.match_page = MatchWidget(self)
 
         # Adding to stack; Pages indexed in order of addition
         self.PageStack.addWidget(self.main_page) # Index 0
@@ -49,6 +52,7 @@ class MainWindow(QtWidgets.QMainWindow):  # Main Window
         self.PageStack.addWidget(self.register_page) # Index 2
         self.PageStack.addWidget(self.login_page) # Index 3
         self.PageStack.addWidget(self.create_page) # Index 4
+        self.PageStack.addWidget(self.match_page) # Index 5
 
         self.setCentralWidget(self.PageStack)
         self.show()
@@ -249,7 +253,7 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
                 self.itemClicked.connect(self.match_click)
 
             def add_matches(self):
-                self.match_text_list = s.get(url= 'http://shak582.com:5000/getallmatches')
+                self.match_text_list = s.get(url= 'http://162.243.35.210:5000/getallmatches')
                 for match_text in self.match_text_list.text.split('\n'):
                     match = QListWidgetItem(match_text)
                     self.addItem(match)
@@ -257,13 +261,15 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
             def match_click(self, match):
                 self.joinMatchDict = {'match' : (str(match.text()))}
                 headers = {'Content-type' : 'application/json'}
-                r = s.post(url = 'http://shak582.com:5000/joinmatch', headers=headers, data=json.dumps(self.joinMatchDict))
+                r = s.post(url = 'http://162.243.35.210:5000/joinmatch', headers=headers, data=json.dumps(self.joinMatchDict))
 
 
         self.matchlist = MatchList()
         self.matchlist.show()
 
     def current_click(self):
+        self.parent().setCurrentIndex(MATCH)
+        '''
         class MatchList(QListWidget):
             def __init__(self):
                 QListWidget.__init__(self)
@@ -271,17 +277,18 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
                 self.itemClicked.connect(self.match_click)
 
             def add_matches(self):
-                self.match_text_list = s.get(url= 'http://shak582.com:5000/getmymatches')
+                self.match_text_list = s.get(url= 'http://162.243.35.210:5000/getmymatches')
                 for match_text in self.match_text_list.text.split('\n'):
                     match = QListWidgetItem(match_text)
                     self.addItem(match)
 
             def match_click(self, match):
                 print (str(match.text()))
+            '''
         
     def logout_click(self):
         self.parent().setCurrentIndex(LOGIN_REGISTER)
-        s.get(url='http://shak582.com:5000/exit')
+        s.get(url='http://162.243.35.210:5000/exit')
         
 
 class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
@@ -335,7 +342,14 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
     def back_click(self):
         self.parent().setCurrentIndex(HOME)
 
+class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
+    def __init__(self, parent):
+        QtWidgets.QWidget.__init__(self, parent)
+        self.setup()
 
+    def setup(self):
+        # Our Layout
+        self.box_layout = QtWidgets.QVBoxLayout()
 
 
 if __name__ == "__main__":
