@@ -59,6 +59,7 @@ def register():
 			u.password = hash(req_data['password'])
 			db.session.add(u)
 			db.session.commit()
+			session['username'] = req_data['username']
 			#return jsonify({'success' : 'right shit'})
 			return 'success'
 		except Exception:
@@ -119,7 +120,8 @@ def getAllMatches():
 	ms = Match.query.all()
 	s = ''
 	for x in ms:
-		s += x.match + '\n'
+		if not x.player2
+			s += x.match + '\n'
 	return s
 
 @app.route('/getmymatches', methods=['GET'])
@@ -138,7 +140,7 @@ def getMyMatches():
 
 			return s
 		except Exception:
-			return 'error'
+			return e.args
 	return 'not logged in'
 
 
