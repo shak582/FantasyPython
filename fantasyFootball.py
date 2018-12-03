@@ -179,6 +179,7 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
         self.box_layout.addWidget(self.regUserTextbox)
         self.box_layout.addWidget(self.regPassTextbox)
         self.box_layout.addWidget(self.registerBtn)
+        self.box_layout.addWidget(self.logout_button)
 
         self.setLayout(self.box_layout)
         self.show()
@@ -198,7 +199,7 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
             headers = {'Content-type' : 'application/json'}
             r = s.post(url = url, headers=headers, data=json.dumps(self.regUsrPassDict))
             print(r.text)
-            self.parent().setCurrentIndex(HOME)
+            self.parent().setCurrentIndex(LOGIN_REGISTER)
         
         self.regUserTextbox.setText("")
         self.regPassTextbox.setText("")
@@ -338,6 +339,7 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
             self.parent().setCurrentIndex(HOME)
         
         self.createMatchTextbox.setText("")
+        self.Create_Match_Title = ""
 
     def back_click(self):
         self.parent().setCurrentIndex(HOME)
