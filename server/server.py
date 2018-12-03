@@ -119,7 +119,7 @@ def getAllMatches():
 	for x in ms:
 		if not x.player2:
 			s += x.match + '\n'
-	return s
+	return 'none' if s=='' else s
 
 @app.route('/getmymatches', methods=['GET'])
 def getMyMatches():
@@ -136,7 +136,7 @@ def getMyMatches():
 				s += x + '\n'
 
 			return s
-		except Exception:
+		except Exception as e:
 			return e.args
 	return 'not logged in'
 
