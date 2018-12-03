@@ -107,6 +107,10 @@ class LoginWidget(QtWidgets.QWidget): # Login Widget to login user
         self.loginBtn = QtWidgets.QPushButton('Login', self)
         self.loginBtn.setFixedSize(280, 40)
 
+        # Back Button
+        self.logout_button = QtWidgets.QPushButton("Back", self)
+        self.logout_button.clicked.connect(self.login_back_click)
+
         self.box_layout.addWidget(self.loginUserTextbox)
         self.box_layout.addWidget(self.loginPassTextbox)
         self.box_layout.addWidget(self.loginBtn)
@@ -118,6 +122,10 @@ class LoginWidget(QtWidgets.QWidget): # Login Widget to login user
         self.loginBtn.clicked.connect(self.login_click)
         self.setLayout(self.box_layout)
         self.show()
+
+    def login_back_click(self):
+        self.parent().setCurrentIndex(LOGIN_REGISTER)
+
  
     def login_click(self):
         self.Login_Username = self.loginUserTextbox.text()
@@ -231,7 +239,8 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
                 self.itemClicked.connect(self.match_click)
 
             def add_matches(self):
-                for match_text in ['Match1', 'Match2', 'Match3']:
+                self.match_text_list = s.get(url= 'http://shak582.com:5000/getallmatches')
+                for match_text in self.match_text_list.text.split('\n'):
                     match = QListWidgetItem(match_text)
                     self.addItem(match)
 
@@ -246,8 +255,8 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
         
     def logout_click(self):
         self.parent().setCurrentIndex(LOGIN_REGISTER)
-        #LEAVE USER SESSION CODE HERE *********!!!!!!!!!!
-
+        s.get(url='http://shak582.com:5000/exit')
+        
 
 class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
     def __init__(self, parent):
@@ -269,17 +278,14 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         # connect button to function on_click
         self.createMatchBtn.clicked.connect(self.create_click)
 
+        self.BackButton = QPushButton('Back', self)
+        self.BackButton.clicked.connect(self.back_click)
+
         # Adding Widgets to Box Layout
         self.box_layout.addWidget(self.createMatchTextbox)
         self.box_layout.addWidget(self.createMatchBtn)
         
         self.setLayout(self.box_layout)
-        
-        # Back button for create page, back to home page.
-        self.BackButton = QPushButton('Back', self)
-        self.BackButton.move(20, 100)
-        self.BackButton.clicked.connect(self.back_click)
-
         self.show()
  
     def create_click(self):
@@ -296,9 +302,10 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
             self.parent().setCurrentIndex(HOME)
         
         self.Create_Match_Title = ""
-        
+
     def back_click(self):
         self.parent().setCurrentIndex(HOME)
+
 
 
 
