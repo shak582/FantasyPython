@@ -12,7 +12,7 @@ app.config['SESSION_TYPE'] = 'filesystem'
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 #app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 Session(app)
-#db.init_app(db)
+#db.init_app(app)
 
 # games = nflgame.games(2017, week=[x for x in range(1, 18)])
 # players = nflgame.combine_game_stats(games)
@@ -102,23 +102,46 @@ def joinMatch():
 	if 'username' in session and 'match' in req_data:
 		try:
 			m = Match.query.filter_by(match=req_data['match']).first()
+			print m
 			if not m:
 				return jsonify({'error' : 'match doesnt exist'})
 			if m.player1 == session['username']:
 				return jsonify({'error' : 'user is already in match'})
 			m.player2 = session['username']
 			db.session.commit()
+			return 'success'
 		except Exception as e:
 			return jsonify({'error' : 'match dont exist'})
-	return jsonify({'sucess' : 'good shit'})
+	return jsonify({'error' : 'good shit'})
 
 @app.route('/getallmatches', methods=['GET'])
 def getAllMatches():
 	ms = Match.query.all()
 	s = ''
 	for x in ms:
-		s += x + '\n'
+		s += x.match + '\n'
 	return s
+
+@app.route('/getmymatches', methods=['GET'])
+def getMyMatches():
+	if 'username' in session:
+		try:
+			m = set(Match.query.filter_by(player1=session['username']).all())
+			d = set(Match.query.filter_by(player2=session['username']).all())
+
+			c = list(m | d)
+
+			s = ''
+
+			for x in c:
+				s += x + '\n'
+
+			return s
+		except Exception:
+			return 'error'
+	return 'not logged in'
+
+
 
 
 # @app.route('/draftplayer', methods=['POST'])
