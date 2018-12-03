@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import *
 LOGIN_REGISTER = 0
 HOME = 1
 
+#comment 
 
 # To change between Pages - self.parent().setCurrentIndex(HOME)
 #          Changes depending on what you want to switch to ^
