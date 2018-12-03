@@ -2,6 +2,7 @@ from flask import Flask
 from flask import jsonify
 from flask import request
 from flask import session
+#from flask_session import Session
 from flask.ext.session import Session
 from user import *
 import nflgame
@@ -14,20 +15,16 @@ app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 #db.init_app(app)
 
-# games = nflgame.games(2017, week=[x for x in range(1, 18)])
-# players = nflgame.combine_game_stats(games)
-
-# passing = [x for x in players.passing()]
-# players = nflgame.combine_game_stats(games)
-# rushing = [x for x in players.rushing()]
-# players = nflgame.combine_game_stats(games)
-# receiver = [x for x in players.receiving()]
-# players = nflgame.combine_game_stats(games)
-# kicking = [x for x in players.kicking()]
-
-
-
-# rushing = set(rushing) - set(passing)
+games = nflgame.games(2017, week=[x for x in range(1, 18)])
+players = nflgame.combine_game_stats(games)
+passing = [x for x in players.passing()]
+players = nflgame.combine_game_stats(games)
+rushing = [x for x in players.rushing()]
+players = nflgame.combine_game_stats(games)
+receiver = [x for x in players.receiving()]
+players = nflgame.combine_game_stats(games)
+kicking = [x for x in players.kicking()]
+rushing = set(rushing) - set(passing)
 
 
 #USER STUFF##########################################
@@ -120,7 +117,7 @@ def getAllMatches():
 	ms = Match.query.all()
 	s = ''
 	for x in ms:
-		if not x.player2
+		if not x.player2:
 			s += x.match + '\n'
 	return s
 
