@@ -152,7 +152,6 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
         self.setup()
 
     def setup(self):
-        self.update = 0
         # Our Layout
         self.box_layout = QtWidgets.QVBoxLayout()
         self.box_layout.setAlignment(Qt.AlignCenter)
