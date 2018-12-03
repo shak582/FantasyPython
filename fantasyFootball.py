@@ -12,9 +12,9 @@ REGISTER = 2
 LOGIN = 3
 CREATE = 4
 
-url = 'http://shak582.com:5000/register'
-url1 = 'http://shak582.com:5000/login'
-url3 = 'http://shak582.com:5000/creatematch'
+url = 'http://162.243.35.210:5000/register'
+url1 = 'http://162.243.35.210:5000/login'
+url3 = 'http://162.243.35.210:5000/creatematch'
 s = requests.session()
 
 
@@ -177,6 +177,7 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
         self.box_layout.addWidget(self.regUserTextbox)
         self.box_layout.addWidget(self.regPassTextbox)
         self.box_layout.addWidget(self.registerBtn)
+        self.box_layout.addWidget(self.logout_button)
 
         self.setLayout(self.box_layout)
         self.show()
@@ -187,16 +188,13 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
     def register_click(self):
         self.Register_Username = self.regUserTextbox.text()
         self.Register_Password = self.regPassTextbox.text()
-
-        # By passing database checking REMEBER TO REMOVE
-        #self.parent().setCurrentIndex(LOGIN_REGISTER)
         
         if self.Register_Username!=None and self.Register_Password !=None:
             self.regUsrPassDict = {'username' : self.Register_Username, 'password' : self.Register_Password}
             headers = {'Content-type' : 'application/json'}
             r = s.post(url = url, headers=headers, data=json.dumps(self.regUsrPassDict))
             print(r.text)
-            self.parent().setCurrentIndex(HOME)
+            self.parent().setCurrentIndex(LOGIN_REGISTER)
         
         self.regUserTextbox=""
         self.regPassTextbox=""
@@ -251,7 +249,7 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
                 self.itemClicked.connect(self.match_click)
 
             def add_matches(self):
-                self.match_text_list = s.get(url= 'http://shak582.com:5000/getallmatches')
+                self.match_text_list = s.get(url= 'http://162.243.35.210:5000/getallmatches')
                 for match_text in self.match_text_list.text.split('\n'):
                     match = QListWidgetItem(match_text)
                     self.addItem(match)
@@ -259,9 +257,7 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
             def match_click(self, match):
                 self.joinMatchDict = {'match' : (str(match.text()))}
                 headers = {'Content-type' : 'application/json'}
-                r = s.post(url = 'http://shak582.com:5000/joinmatch', headers=headers, data=json.dumps(self.joinMatchDict))
-
-
+                r = s.post(url = 'http://162.243.35.210:5000/joinmatch', headers=headers, data=json.dumps(self.joinMatchDict))
         self.matchlist = MatchList()
         self.matchlist.show()
 
@@ -273,17 +269,20 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
                 self.itemClicked.connect(self.match_click)
 
             def add_matches(self):
-                self.match_text_list = s.get(url= 'http://shak582.com:5000/getmymatches')
+                self.match_text_list = s.get(url= 'http://162.243.35.210:5000/getmymatches')
                 for match_text in self.match_text_list.text.split('\n'):
                     match = QListWidgetItem(match_text)
                     self.addItem(match)
-
             def match_click(self, match):
-                print (str(match.text()))
-        
+                self.joinMatchDict = {'match': (str(match.text()))}
+                headers = {'Content-type': 'application/json'}
+                r = s.post(url='http://162.243.35.210:5000/joinmatch', headers=headers, data=json.dumps(self.joinMatchDict))
+        self.matchlist = MatchList()
+        self.matchlist.show()
+
     def logout_click(self):
         self.parent().setCurrentIndex(LOGIN_REGISTER)
-        s.get(url='http://shak582.com:5000/exit')
+        s.get(url='http://162.243.35.210:5000/exit')
         
 
 class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
@@ -323,7 +322,7 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.Create_Match_Title = self.createMatchTextbox.text()
 
         # By passing database checking REMEMBER TO REMOVE
-        #self.parent().setCurrentIndex(HOME)
+        # self.parent().setCurrentIndex(HOME)
         
         if self.Create_Match_Title!="":
             self.matchTitle = {'match' : self.Create_Match_Title}
@@ -331,7 +330,6 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
             r = s.post(url = url3, headers=headers, data=json.dumps(self.matchTitle))
             print(r.text)
             self.parent().setCurrentIndex(HOME)
-        
         self.Create_Match_Title = ""
 
     def back_click(self):
