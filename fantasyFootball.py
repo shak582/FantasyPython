@@ -17,7 +17,6 @@ url1 = 'http://162.243.35.210:5000/login'
 url3 = 'http://162.243.35.210:5000/creatematch'
 s = requests.session()
 
-
 # INDEXES FOR STACK
 # 0 - LoginRegisterWidget
 # 1 - HomeWidget
@@ -141,8 +140,8 @@ class LoginWidget(QtWidgets.QWidget): # Login Widget to login user
             print(r.text)
             if r.text == "success":
                 self.parent().setCurrentIndex(HOME)
-        self.loginUserTextbox.setText("")
-        self.loginPassTextbox.setText("")
+        self.loginUserTextbox=""
+        self.loginPassTextbox=""
     
 
 
@@ -152,7 +151,6 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
         self.setup()
 
     def setup(self):
-        self.update = 0
         # Our Layout
         self.box_layout = QtWidgets.QVBoxLayout()
         self.box_layout.setAlignment(Qt.AlignCenter)
