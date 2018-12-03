@@ -227,7 +227,6 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
 
         # Logout Button
         self.logout_button = QtWidgets.QPushButton("Logout", self)
-        self.logout_button.setFixedSize(280, 40)
         self.logout_button.clicked.connect(self.logout_click)
         self.logout_button.setFixedSize(280, 40)
 
@@ -292,7 +291,7 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         # connect button to function on_click
         self.createMatchBtn.clicked.connect(self.create_click)
 
-        s     # Back button for create page, back to home page.
+        # Back button for create page, back to home page.
         self.backButton = QPushButton('Back', self)
         self.backButton.setFixedSize(280, 40)
         self.backButton.clicked.connect(self.back_click)
@@ -301,7 +300,6 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.box_layout.addWidget(self.createMatchTextbox)
         self.box_layout.addWidget(self.createMatchBtn)
         self.box_layout.addWidget(self.backButton)
-
         
         self.setLayout(self.box_layout)
         self.show()
