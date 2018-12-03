@@ -106,17 +106,17 @@ class LoginWidget(QtWidgets.QWidget): # Login Widget to login user
 
         self.loginBtn = QtWidgets.QPushButton('Login', self)
         self.loginBtn.setFixedSize(280, 40)
+        self.loginBtn.clicked.connect(self.login_click)
 
         # Back Button
         self.logout_button = QtWidgets.QPushButton("Back", self)
+        self.logout_button.setFixedSize(280, 40)
         self.logout_button.clicked.connect(self.login_back_click)
 
         self.box_layout.addWidget(self.loginUserTextbox)
         self.box_layout.addWidget(self.loginPassTextbox)
         self.box_layout.addWidget(self.loginBtn)
-
-
-
+        self.box_layout.addWidget(self.logout_button)
  
         # connect button to function on_click
         self.loginBtn.clicked.connect(self.login_click)
@@ -143,6 +143,7 @@ class LoginWidget(QtWidgets.QWidget): # Login Widget to login user
                 self.parent().setCurrentIndex(HOME)
         self.loginUserTextbox.setText("")
         self.loginPassTextbox.setText("")
+    
 
 
 class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
@@ -151,6 +152,7 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
         self.setup()
 
     def setup(self):
+        self.update = 0
         # Our Layout
         self.box_layout = QtWidgets.QVBoxLayout()
         self.box_layout.setAlignment(Qt.AlignCenter)
@@ -264,7 +266,20 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
         self.matchlist.show()
 
     def current_click(self):
-        self.garbage = 0
+        class MatchList(QListWidget):
+            def __init__(self):
+                QListWidget.__init__(self)
+                self.add_matches()
+                self.itemClicked.connect(self.match_click)
+
+            def add_matches(self):
+                self.match_text_list = s.get(url= 'http://shak582.com:5000/getmymatches')
+                for match_text in self.match_text_list.text.split('\n'):
+                    match = QListWidgetItem(match_text)
+                    self.addItem(match)
+
+            def match_click(self, match):
+                print (str(match.text()))
         
     def logout_click(self):
         self.parent().setCurrentIndex(LOGIN_REGISTER)
