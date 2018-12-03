@@ -160,6 +160,11 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
         # Create a button in the window
         self.registerBtn = QPushButton('Register', self)
         self.registerBtn.setFixedSize(280, 40)
+
+        # Back Button
+        self.logout_button = QtWidgets.QPushButton("Back", self)
+        self.logout_button.clicked.connect(self.register_back_click)
+
         # connect button to function on_click
         self.registerBtn.clicked.connect(self.register_click)
 
@@ -170,7 +175,10 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
 
         self.setLayout(self.box_layout)
         self.show()
- 
+
+    def register_back_click(self):
+        self.parent().setCurrentIndex(LOGIN_REGISTER)
+
     def register_click(self):
         self.Register_Username = self.regUserTextbox.text()
         self.Register_Password = self.regPassTextbox.text()
