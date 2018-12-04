@@ -350,6 +350,55 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.setup()
 
     def setup(self):
+    #calculate p1 scores
+        #UPDATE ALL PLAYER STATS WITH API (self.statistic = int(string statistic from API))
+        self.QBP1passYds=303
+        self.QBP1touchdwns=4
+        self.QBP1score = self.QBP1passYds/20 + self.QBP1touchdwns*6
+
+        self.RBP1rushYds=97
+        self.RBP1touchdwns=2
+        self.RBP1score = self.RBP1rushYds/10 + self.RBP1touchdwns*6
+
+        self.WRP1passYds=67
+        self.WRP1touchdwns=1
+        self.WRP1score = self.WRP1passYds/10 + self.WRP1touchdwns*6
+
+        self.KP1extraPts=4
+        self.KP1fg=1
+        self.KP1score = self.KP1extraPts + self.KP1fg*3
+
+        #find what def statistics are on API
+        self.DEFP1score = 6.0
+
+        self.scoreP1= self.QBP1score + self.RBP1score + self.WRP1score + self.KP1score + self.DEFP1score
+
+    #calculate p2 scores
+
+        #UPDATE ALL PLAYER STATS WITH API (self.statistic = int(string statistic from API))
+        self.QBP2passYds=400
+        self.QBP2touchdwns=3
+
+        self.QBP2score = self.QBP2passYds/20 + self.QBP2touchdwns*6
+
+        self.RBP2rushYds=120
+        self.RBP2touchdwns=0
+        self.RBP2score = self.RBP2rushYds/10 + self.RBP2touchdwns*6
+
+        self.WRP2passYds=153
+        self.WRP2touchdwns=2
+        self.WRP2score = self.WRP2passYds/10 + self.WRP2touchdwns*6
+
+        self.KP2extraPts=1
+        self.KP2fg=2
+        self.KP2score = self.KP2extraPts + self.KP2fg*3
+
+        #find what def statistics are on API
+        self.DEFP2score = 4.0
+
+        self.scoreP2= self.QBP2score + self.RBP2score + self.WRP2score + self.KP2score + self.DEFP2score
+
+
     #Match Label
         self.fontMatch = QFont()
         self.fontMatch.setBold(True)
@@ -392,16 +441,16 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
         self.scorelabelP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL SCORE P1 NAME FROM DATABASE
-        #self.scoreP1 = str(int)
-        self.scorelabelP1.setText("134.0")
+        self.scoreP1Str = str(self.scoreP1)
+        self.scorelabelP1.setText(self.scoreP1Str)
         self.scorelabelP1.resize(320, 20)
         self.scorelabelP1.move(130, 130)
         self.scorelabelP1.setFont(self.fontScores)
 
         self.scorelabelP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL SCORE P2 NAME FROM DATABASE
-        #self.scoreP2 = str(int)
-        self.scorelabelP2.setText("113.0")
+        self.scoreP2Str = str(self.scoreP2)
+        self.scorelabelP2.setText(self.scoreP2Str)
         self.scorelabelP2.resize(320, 20)
         self.scorelabelP2.move(480, 130)
         self.scorelabelP2.setFont(self.fontScores)
@@ -485,7 +534,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         #RETRIEVE ACTUAL QB P1 NAME FROM DATABASE
         #self.QBP1 = string
         self.QBnameP1.setText("T. Brady")
-        self.QBnameP1.resize(210, 20)
+        self.QBnameP1.resize(200, 20)
         self.QBnameP1.move(90, 200)
         self.QBnameP1.setFont(self.fontPlayerName)
 
@@ -493,7 +542,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         #RETRIEVE ACTUAL RB P1 NAME FROM DATABASE
         #self.RBP1 = string
         self.RBnameP1.setText("K. Drake")
-        self.RBnameP1.resize(210, 20)
+        self.RBnameP1.resize(200, 20)
         self.RBnameP1.move(90, 275)
         self.RBnameP1.setFont(self.fontPlayerName)
 
@@ -501,7 +550,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         #RETRIEVE ACTUAL WR P1 NAME FROM DATABASE
         #self.WRP1 = string
         self.WRnameP1.setText("B. Cooks")
-        self.WRnameP1.resize(210, 20)
+        self.WRnameP1.resize(200, 20)
         self.WRnameP1.move(90, 350)
         self.WRnameP1.setFont(self.fontPlayerName)
 
@@ -509,7 +558,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         #RETRIEVE ACTUAL K P1 NAME FROM DATABASE
         #self.KP1 = string
         self.KnameP1.setText("A. Vinatieri")
-        self.KnameP1.resize(210, 20)
+        self.KnameP1.resize(200, 20)
         self.KnameP1.move(90, 425)
         self.KnameP1.setFont(self.fontPlayerName)
 
@@ -517,7 +566,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         #RETRIEVE ACTUAL DEF P1 NAME FROM DATABASE
         #self.DEFP1 = string
         self.DEFnameP1.setText("Dolphins")
-        self.DEFnameP1.resize(210, 20)
+        self.DEFnameP1.resize(200, 20)
         self.DEFnameP1.move(90, 500)
         self.DEFnameP1.setFont(self.fontPlayerName)
 
@@ -527,7 +576,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         #RETRIEVE ACTUAL QB P2 NAME FROM DATABASE
         #self.QBP2 = string
         self.QBnameP2.setText("P. Mahomes")
-        self.QBnameP2.resize(210, 20)
+        self.QBnameP2.resize(200, 20)
         self.QBnameP2.move(440, 200)
         self.QBnameP2.setFont(self.fontPlayerName)
 
@@ -535,7 +584,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         #RETRIEVE ACTUAL RB P2 NAME FROM DATABASE
         #self.RBP2 = string
         self.RBnameP2.setText("S. Barkley")
-        self.RBnameP2.resize(210, 20)
+        self.RBnameP2.resize(200, 20)
         self.RBnameP2.move(440, 275)
         self.RBnameP2.setFont(self.fontPlayerName)
 
@@ -543,7 +592,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         #RETRIEVE ACTUAL WR P2 NAME FROM DATABASE
         #self.WRP2 = string
         self.WRnameP2.setText("O. Beckham")
-        self.WRnameP2.resize(210, 20)
+        self.WRnameP2.resize(200, 20)
         self.WRnameP2.move(440, 350)
         self.WRnameP2.setFont(self.fontPlayerName)
 
@@ -551,7 +600,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         #RETRIEVE ACTUAL K P2 NAME FROM DATABASE
         #self.KP2 = string
         self.KnameP2.setText("J. Tucker")
-        self.KnameP2.resize(210, 20)
+        self.KnameP2.resize(200, 20)
         self.KnameP2.move(440, 425)
         self.KnameP2.setFont(self.fontPlayerName)
 
@@ -559,7 +608,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         #RETRIEVE ACTUAL DEF P2 NAME FROM DATABASE
         #self.DEFP2 = string
         self.DEFnameP2.setText("Saints")
-        self.DEFnameP2.resize(210, 20)
+        self.DEFnameP2.resize(200, 20)
         self.DEFnameP2.move(440, 500)
         self.DEFnameP2.setFont(self.fontPlayerName)
 
@@ -571,83 +620,83 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
     #p1 player scores
         self.QBscoreP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL QB P1 score FROM DATABASE
-        #self.QBP1score = str(int) + " pts"
-        self.QBscoreP1.setText("19 pts")
-        self.QBscoreP1.resize(50, 20)
-        self.QBscoreP1.move(300, 200)
+        self.QBP1scoreStr = str(self.QBP1score) + " pts"
+        self.QBscoreP1.setText(self.QBP1scoreStr)
+        self.QBscoreP1.resize(60, 20)
+        self.QBscoreP1.move(290, 200)
         self.QBscoreP1.setFont(self.fontPlayerScore)
 
         self.RBscoreP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL RB P1 score FROM DATABASE
-        #self.RBP1score = str(int) + " pts"
-        self.RBscoreP1.setText("15 pts")
-        self.RBscoreP1.resize(50, 20)
-        self.RBscoreP1.move(300, 275)
+        self.RBP1scoreStr = str(self.RBP1score) + " pts"
+        self.RBscoreP1.setText(self.RBP1scoreStr)
+        self.RBscoreP1.resize(60, 20)
+        self.RBscoreP1.move(290, 275)
         self.RBscoreP1.setFont(self.fontPlayerScore)
 
         self.WRscoreP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL WR P1 score FROM DATABASE
-        #self.WRP1score = str(int) + " pts"
-        self.WRscoreP1.setText("12 pts")
-        self.WRscoreP1.resize(50, 20)
-        self.WRscoreP1.move(300, 350)
+        self.WRP1scoreStr = str(self.WRP1score) + " pts"
+        self.WRscoreP1.setText(self.WRP1scoreStr)
+        self.WRscoreP1.resize(60, 20)
+        self.WRscoreP1.move(290, 350)
         self.WRscoreP1.setFont(self.fontPlayerScore)
 
         self.KscoreP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL K P1 score FROM DATABASE
-        #self.KP1score = str(int) + " pts"
-        self.KscoreP1.setText("4 pts")
-        self.KscoreP1.resize(50, 20)
-        self.KscoreP1.move(300, 425)
+        self.KP1scoreStr = str(self.KP1score) + " pts"
+        self.KscoreP1.setText(self.KP1scoreStr)
+        self.KscoreP1.resize(60, 20)
+        self.KscoreP1.move(290, 425)
         self.KscoreP1.setFont(self.fontPlayerScore)
 
         self.DEFscoreP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL DEF P1 score FROM DATABASE
-        #self.DEFP1score = str(int) + " pts"
-        self.DEFscoreP1.setText("6 pts")
-        self.DEFscoreP1.resize(50, 20)
-        self.DEFscoreP1.move(300, 500)
+        self.DEFP1scoreStr = str(self.DEFP1score) + " pts"
+        self.DEFscoreP1.setText(self.DEFP1scoreStr)
+        self.DEFscoreP1.resize(60, 20)
+        self.DEFscoreP1.move(290, 500)
         self.DEFscoreP1.setFont(self.fontPlayerScore)
 
     #p2 player scores
         self.QBscoreP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL QB P2 score FROM DATABASE
-        #self.QBP2score = str(int) + " pts"
-        self.QBscoreP2.setText("20 pts")
-        self.QBscoreP2.resize(50, 20)
-        self.QBscoreP2.move(650, 200)
+        self.QBP2scoreStr = str(self.QBP2score) + " pts"
+        self.QBscoreP2.setText(self.QBP2scoreStr)
+        self.QBscoreP2.resize(60, 20)
+        self.QBscoreP2.move(640, 200)
         self.QBscoreP2.setFont(self.fontPlayerScore)
 
         self.RBscoreP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL RB P2 score FROM DATABASE
-        #self.RBP2score = str(int) + " pts"
-        self.RBscoreP2.setText("11 pts")
-        self.RBscoreP2.resize(50, 20)
-        self.RBscoreP2.move(650, 275)
+        self.RBP2scoreStr = str(self.RBP2score) + " pts"
+        self.RBscoreP2.setText(self.RBP2scoreStr)
+        self.RBscoreP2.resize(60, 20)
+        self.RBscoreP2.move(640, 275)
         self.RBscoreP2.setFont(self.fontPlayerScore)
 
         self.WRscoreP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL WR P2 score FROM DATABASE
-        #self.WRP2score = str(int) + " pts"
-        self.WRscoreP2.setText("16 pts")
-        self.WRscoreP2.resize(50, 20)
-        self.WRscoreP2.move(650, 350)
+        self.WRP2scoreStr = str(self.WRP2score) + " pts"
+        self.WRscoreP2.setText(self.WRP2scoreStr)
+        self.WRscoreP2.resize(60, 20)
+        self.WRscoreP2.move(640, 350)
         self.WRscoreP2.setFont(self.fontPlayerScore)
 
         self.KscoreP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL K P2 score FROM DATABASE
-        #self.KP2score = str(int) + " pts"
-        self.KscoreP2.setText("3 pts")
-        self.KscoreP2.resize(50, 20)
-        self.KscoreP2.move(650, 425)
+        self.KP2scoreStr = str(self.KP2score) + " pts"
+        self.KscoreP2.setText(self.KP2scoreStr)
+        self.KscoreP2.resize(60, 20)
+        self.KscoreP2.move(640, 425)
         self.KscoreP2.setFont(self.fontPlayerScore)
 
         self.DEFscoreP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL DEF P2 score FROM DATABASE
-        #self.DEFP2score = str(int) + " pts"
-        self.DEFscoreP2.setText("4 pts")
-        self.DEFscoreP2.resize(50, 20)
-        self.DEFscoreP2.move(650, 500)
+        self.DEFP2scoreStr = str(self.DEFP2score) + " pts"
+        self.DEFscoreP2.setText(self.DEFP2scoreStr)
+        self.DEFscoreP2.resize(60, 20)
+        self.DEFscoreP2.move(640, 500)
         self.DEFscoreP2.setFont(self.fontPlayerScore)
 
     def paintEvent(self, event):
