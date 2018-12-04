@@ -350,7 +350,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.setup()
 
     def setup(self):
-        #Match Label
+    #Match Label
         self.fontMatch = QFont()
         self.fontMatch.setBold(True)
         self.fontMatch.setPointSize(20)
@@ -364,7 +364,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.matchLabel.setFont(self.fontMatch)
 
 
-        #USERNAME LABELS
+    #USERNAME LABELS
         self.fontUsers = QFont()
         self.fontUsers.setPointSize(18)
 
@@ -385,7 +385,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.usrlabelP2.setFont(self.fontUsers)
 
 
-        #SCORELABELS
+    #SCORELABELS
         self.fontScores = QFont()
         self.fontScores.setBold(True)
         self.fontScores.setPointSize(18)
@@ -395,7 +395,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         #self.scoreP1 = str(int)
         self.scorelabelP1.setText("134.0")
         self.scorelabelP1.resize(320, 20)
-        self.scorelabelP1.move(150, 120)
+        self.scorelabelP1.move(130, 130)
         self.scorelabelP1.setFont(self.fontScores)
 
         self.scorelabelP2 = QtWidgets.QLabel(self)
@@ -403,16 +403,16 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         #self.scoreP2 = str(int)
         self.scorelabelP2.setText("113.0")
         self.scorelabelP2.resize(320, 20)
-        self.scorelabelP2.move(500, 120)
+        self.scorelabelP2.move(480, 130)
         self.scorelabelP2.setFont(self.fontScores)
 
 
-        #font for player positions
+    #font for player positions
         self.fontPosition = QFont()
         self.fontPosition.setBold(True)
         self.fontPosition.setPointSize(14)
 
-        #p1 postition labels
+    #p1 postition labels
         self.QBlabelP1 = QtWidgets.QLabel(self)
         self.QBlabelP1.setText("QB")
         self.QBlabelP1.resize(50, 20)
@@ -444,7 +444,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.DEFlabelP1.setFont(self.fontPosition)
 
 
-        #p2 position labels
+    #p2 position labels
         self.QBlabelP2 = QtWidgets.QLabel(self)
         self.QBlabelP2.setText("QB")
         self.QBlabelP2.resize(50, 20)
@@ -476,11 +476,11 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.DEFlabelP2.setFont(self.fontPosition)
 
 
-        #font for player names
+    #font for player names
         self.fontPlayerName = QFont()
         self.fontPlayerName.setPointSize(11)
 
-        #p1 player names
+    #p1 player names
         self.QBnameP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL QB P1 NAME FROM DATABASE
         #self.QBP1 = string
@@ -522,7 +522,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.DEFnameP1.setFont(self.fontPlayerName)
 
 
-        #p2 player names
+    #p2 player names
         self.QBnameP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL QB P2 NAME FROM DATABASE
         #self.QBP2 = string
@@ -563,17 +563,29 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.DEFnameP2.move(440, 500)
         self.DEFnameP2.setFont(self.fontPlayerName)
 
-        self.show()
-        
-        
-    '''
     def paintEvent(self, event):
         qp = QtGui.QPainter()
         qp.begin(self)
         pen = qp.pen()
-        pen.setColor(QtCore.Qt.black)
-        qp.drawLine(self, 0, 350, 700, 350)
-    '''
+        pen.setColor(Qt.black)
+    #horizontal line 0
+        qp.drawLine(10, 50, 690, 50)
+    #vertical line
+        qp.drawLine(350, 50, 350, 700)
+    #horizontal line 1
+        qp.drawLine(10, 105, 690, 105)
+    #horizontal line 2
+        qp.drawLine(10, 175, 690, 175)
+    #horizontal line 3
+        qp.drawLine(10, 250, 690, 250)
+    #horizontal line 4
+        qp.drawLine(10, 325, 690, 325)
+    #horizontal line 5
+        qp.drawLine(10, 400, 690, 400)
+    #horizontal line 6
+        qp.drawLine(10, 475, 690, 475)
+
+        qp.end()
 
 
 if __name__ == "__main__":
