@@ -309,7 +309,6 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         # Create a button in the window
         self.createMatchBtn = QPushButton('Create Match', self)
         self.createMatchBtn.setFixedSize(280, 40)
-        # connect button to function on_click
         self.createMatchBtn.clicked.connect(self.create_click)
 
         # Back button for create page, back to home page.
@@ -350,6 +349,11 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.setup()
 
     def setup(self):
+    #Return Home Button
+        self.goHome_button = QtWidgets.QPushButton("Go Home", self)
+        self.goHome_button.setFixedSize(75, 40)
+        self.goHome_button.move(620, 5)
+        self.goHome_button.clicked.connect(self.goHome_clicked)
     #calculate p1 scores
         #UPDATE ALL PLAYER STATS WITH API (self.statistic = int(string statistic from API))
         self.QBP1passYds=303
@@ -366,7 +370,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
         self.KP1extraPts=4
         self.KP1fg=1
-        self.KP1score = self.KP1extraPts + self.KP1fg*3
+        self.KP1score = self.KP1extraPts/1 + self.KP1fg*3
 
         #find what def statistics are on API
         self.DEFP1score = 6.0
@@ -391,7 +395,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
         self.KP2extraPts=1
         self.KP2fg=2
-        self.KP2score = self.KP2extraPts + self.KP2fg*3
+        self.KP2score = self.KP2extraPts/1 + self.KP2fg*3
 
         #find what def statistics are on API
         self.DEFP2score = 4.0
@@ -408,7 +412,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         #RETRIEVE ACTUAL MATCH NAME FROM DATABASE
         #self.matchName = string
         self.matchLabel.setText("PYTHON FANTASY MATCH TITLE")
-        self.matchLabel.resize(670, 50)
+        self.matchLabel.resize(590, 50)
         self.matchLabel.move(30, 0)
         self.matchLabel.setFont(self.fontMatch)
 
@@ -698,6 +702,9 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.DEFscoreP2.resize(60, 20)
         self.DEFscoreP2.move(640, 500)
         self.DEFscoreP2.setFont(self.fontPlayerScore)
+
+    def goHome_clicked(self):
+        self.parent().setCurrentIndex(HOME)
 
     def paintEvent(self, event):
         qp = QtGui.QPainter()
