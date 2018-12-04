@@ -346,9 +346,9 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
     def __init__(self, parent):
         QtWidgets.QWidget.__init__(self, parent)
-        self.setup()
-
-    def setup(self):
+        self.matchStats()
+    #if draft is complete:
+    def matchStats(self):
     #Return Home Button
         self.goHome_button = QtWidgets.QPushButton("Go Home", self)
         self.goHome_button.setFixedSize(75, 40)
