@@ -365,10 +365,15 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
         self.draftPlayerTextbox.setFixedSize(280,40)
 
 
-        # Create a button in the window
+        # Search player button
         self.draftPlayerBtn = QPushButton('Search Player', self)
         self.draftPlayerBtn.setFixedSize(280, 40)
         self.draftPlayerBtn.clicked.connect(self.draftPlayer_clicked)
+
+        # Search player button
+        self.finishDraftBtn = QPushButton('Complete Draft', self)
+        self.finishDraftBtn.setFixedSize(280, 40)
+        self.finishDraftBtn.clicked.connect(self.finishDraft_clicked)
 
         # Back button for create page, back to home page.
         self.backButton = QPushButton('Back', self)
@@ -378,6 +383,7 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
         # Adding Widgets to Box Layout
         self.box_layout.addWidget(self.draftPlayerTextbox)
         self.box_layout.addWidget(self.draftPlayerBtn)
+        self.box_layout.addWidget(self.finishDraftBtn)
         self.box_layout.addWidget(self.backButton)
         
         self.setLayout(self.box_layout)
@@ -385,9 +391,6 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
  
     def draftPlayer_clicked(self):
         self.draftedPlayer = self.draftPlayerTextbox.text()
-
-        # By passing database checking REMEMBER TO REMOVE
-        self.parent().setCurrentIndex(MATCH)
         
         if self.draftedPlayer!="":
             #self.matchTitle = {'match' : self.Create_Match_Title}
@@ -398,6 +401,10 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
         
         self.draftPlayerTextbox.setText("")
         self.Create_Match_Title = ""
+
+    def finishDraft_clicked(self):
+        # By passing database checking REMEMBER TO REMOVE
+        self.parent().setCurrentIndex(MATCH)
 
     def back_clicked(self):
         self.parent().setCurrentIndex(HOME)
