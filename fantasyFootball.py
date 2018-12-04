@@ -12,6 +12,7 @@ REGISTER = 2
 LOGIN = 3
 CREATE = 4
 MATCH = 5
+DRAFT = 6
 
 url = 'http://162.243.35.210:5000/register'
 url1 = 'http://162.243.35.210:5000/login'
@@ -25,6 +26,7 @@ s = requests.session()
 # 3 - LoginWidget
 # 4 - CreateWidget
 # 5 - MatchWidget
+# 6 - DraftWidget
 
 class MainWindow(QtWidgets.QMainWindow):  # Main Window
     def __init__(self):
@@ -45,6 +47,7 @@ class MainWindow(QtWidgets.QMainWindow):  # Main Window
         self.login_page = LoginWidget(self)
         self.create_page = CreateWidget(self)
         self.match_page = MatchWidget(self)
+        self.draft_page = DraftWidget(self)
 
         # Adding to stack; Pages indexed in order of addition
         self.PageStack.addWidget(self.main_page) # Index 0
@@ -53,6 +56,7 @@ class MainWindow(QtWidgets.QMainWindow):  # Main Window
         self.PageStack.addWidget(self.login_page) # Index 3
         self.PageStack.addWidget(self.create_page) # Index 4
         self.PageStack.addWidget(self.match_page) # Index 5
+        self.PageStack.addWidget(self.draft_page) # Index 6
 
         self.setCentralWidget(self.PageStack)
         self.show()
@@ -269,7 +273,11 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
         self.matchlist.show()
 
     def current_click(self):
-        self.parent().setCurrentIndex(MATCH)
+        #if draft is NOT complete:
+        self.parent().setCurrentIndex(DRAFT)
+        #if draft is complete:
+        #self.parent().setCurrentIndex(MATCH)
+
         '''
         class MatchList(QListWidget):
             def __init__(self):
@@ -343,11 +351,62 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
     def back_click(self):
         self.parent().setCurrentIndex(HOME)
 
+class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
+    def __init__(self, parent):
+        QtWidgets.QWidget.__init__(self, parent)
+        self.draft()
+
+    def draft(self):
+        # Our Layout
+        self.box_layout = QtWidgets.QVBoxLayout()
+        self.box_layout.setAlignment(Qt.AlignCenter)
+
+        self.draftPlayerTextbox = QLineEdit(self)
+        self.draftPlayerTextbox.setFixedSize(280,40)
+
+
+        # Create a button in the window
+        self.draftPlayerBtn = QPushButton('Draft Player', self)
+        self.draftPlayerBtn.setFixedSize(280, 40)
+        self.draftPlayerBtn.clicked.connect(self.draftPlayer_clicked)
+
+        # Back button for create page, back to home page.
+        self.backButton = QPushButton('Back', self)
+        self.backButton.setFixedSize(280, 40)
+        self.backButton.clicked.connect(self.back_clicked)
+
+        # Adding Widgets to Box Layout
+        self.box_layout.addWidget(self.draftPlayerTextbox)
+        self.box_layout.addWidget(self.draftPlayerBtn)
+        self.box_layout.addWidget(self.backButton)
+        
+        self.setLayout(self.box_layout)
+        self.show()
+ 
+    def draftPlayer_clicked(self):
+        self.draftedPlayer = self.draftPlayerTextbox.text()
+
+        # By passing database checking REMEMBER TO REMOVE
+        self.parent().setCurrentIndex(MATCH)
+        
+        if self.draftedPlayer!="":
+            #self.matchTitle = {'match' : self.Create_Match_Title}
+            #headers = {'Content-type' : 'application/json'}
+            #r = s.post(url = teamURL, headers=headers, data=json.dumps(self.matchTitle))
+            #print(r.text)
+            self.parent().setCurrentIndex(MATCH)
+        
+        self.draftPlayerTextbox.setText("")
+        self.Create_Match_Title = ""
+
+    def back_clicked(self):
+        self.parent().setCurrentIndex(HOME)
+
 class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
     def __init__(self, parent):
         QtWidgets.QWidget.__init__(self, parent)
         self.matchStats()
-    #if draft is complete:
+
     def matchStats(self):
     #Return Home Button
         self.goHome_button = QtWidgets.QPushButton("Go Home", self)
