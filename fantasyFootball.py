@@ -135,7 +135,7 @@ class LoginWidget(QtWidgets.QWidget): # Login Widget to login user
         self.Login_Password = self.loginPassTextbox.text()
 
         # By passing database checking REMEMBER TO 
-        # self.parent().setCurrentIndex(HOME)
+        self.parent().setCurrentIndex(HOME)
         
         if self.Login_Username != "" and self.Login_Password != "":
             self.loginUsrPassDict = {'username': self.Login_Username, 'password': self.Login_Password}
@@ -192,7 +192,7 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
         self.Register_Password = self.regPassTextbox.text()
 
         # By passing database checking REMEBER TO REMOVE
-        #self.parent().setCurrentIndex(LOGIN_REGISTER)
+        self.parent().setCurrentIndex(LOGIN_REGISTER)
         
         if self.Register_Username!=None and self.Register_Password !=None:
             self.regUsrPassDict = {'username' : self.Register_Username, 'password' : self.Register_Password}
@@ -329,7 +329,7 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.Create_Match_Title = self.createMatchTextbox.text()
 
         # By passing database checking REMEMBER TO REMOVE
-        #self.parent().setCurrentIndex(HOME)
+        self.parent().setCurrentIndex(HOME)
         
         if self.Create_Match_Title!="":
             self.matchTitle = {'match' : self.Create_Match_Title}
@@ -350,8 +350,138 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.setup()
 
     def setup(self):
-        # Our Layout
-        self.box_layout = QtWidgets.QVBoxLayout()
+        #Match Label
+        self.fontMatch = QFont()
+        self.fontMatch.setBold(True)
+        self.fontMatch.setPointSize(20)
+
+        self.matchLabel = QtWidgets.QLabel(self)
+        #RETRIEVE ACTUAL MATCH NAME FROM DATABASE
+        #self.matchName = string
+        self.matchLabel.setText("PYTHON FANTASY MATCH TITLE")
+        self.matchLabel.resize(670, 50)
+        self.matchLabel.move(30, 0)
+        self.matchLabel.setFont(self.fontMatch)
+
+        #USERNAME LABELS
+        self.fontUsers = QFont()
+        self.fontUsers.setPointSize(18)
+
+        self.usrlabelP1 = QtWidgets.QLabel(self)
+        #RETRIEVE ACTUAL USER 1 NAME FROM DATABASE
+        #self.user1Name = string
+        self.usrlabelP1.setText("USER 1")
+        self.usrlabelP1.resize(320, 20)
+        self.usrlabelP1.move(30, 70)
+        self.usrlabelP1.setFont(self.fontUsers)
+
+        self.usrlabelP2 = QtWidgets.QLabel(self)
+        #RETRIEVE ACTUAL USER 2 NAME FROM DATABASE
+        #self.user2Name = string
+        self.usrlabelP2.setText("USER 2")
+        self.usrlabelP2.resize(320, 20)
+        self.usrlabelP2.move(380, 70)
+        self.usrlabelP2.setFont(self.fontUsers)
+
+        #SCORELABELS
+        self.fontScores = QFont()
+        self.fontScores.setBold(True)
+        self.fontScores.setPointSize(18)
+
+        self.scorelabelP1 = QtWidgets.QLabel(self)
+        #RETRIEVE ACTUAL SCORE P1 NAME FROM DATABASE
+        #self.scoreP1 = str(int)
+        self.scorelabelP1.setText("134.0")
+        self.scorelabelP1.resize(320, 20)
+        self.scorelabelP1.move(150, 120)
+        self.scorelabelP1.setFont(self.fontScores)
+
+        self.scorelabelP2 = QtWidgets.QLabel(self)
+        #RETRIEVE ACTUAL SCORE P2 NAME FROM DATABASE
+        #self.scoreP2 = str(int)
+        self.scorelabelP2.setText("113.0")
+        self.scorelabelP2.resize(320, 20)
+        self.scorelabelP2.move(500, 120)
+        self.scorelabelP2.setFont(self.fontScores)
+
+        #font for player labels
+        self.fontPosition = QFont()
+        self.fontPosition.setBold(True)
+        self.fontPosition.setPointSize(14)
+
+        #p1 postition labels
+        self.QBlabelP1 = QtWidgets.QLabel(self)
+        self.QBlabelP1.setText("QB")
+        self.QBlabelP1.resize(50, 20)
+        self.QBlabelP1.move(30, 200)
+        self.QBlabelP1.setFont(self.fontPosition)
+
+        self.RBlabelP1 = QtWidgets.QLabel(self)
+        self.RBlabelP1.setText("RB")
+        self.RBlabelP1.resize(50, 20)
+        self.RBlabelP1.move(30, 275)
+        self.RBlabelP1.setFont(self.fontPosition)
+
+        self.WRlabelP1 = QtWidgets.QLabel(self)
+        self.WRlabelP1.setText("WR")
+        self.WRlabelP1.resize(50, 20)
+        self.WRlabelP1.move(30, 350)
+        self.WRlabelP1.setFont(self.fontPosition)
+
+        self.KlabelP1 = QtWidgets.QLabel(self)
+        self.KlabelP1.setText("K")
+        self.KlabelP1.resize(50, 20)
+        self.KlabelP1.move(30, 425)
+        self.KlabelP1.setFont(self.fontPosition)
+
+        self.DEFlabelP1 = QtWidgets.QLabel(self)
+        self.DEFlabelP1.setText("DEF")
+        self.DEFlabelP1.resize(50, 20)
+        self.DEFlabelP1.move(30, 500)
+        self.DEFlabelP1.setFont(self.fontPosition)
+
+        #p2 position labels
+        self.QBlabelP2 = QtWidgets.QLabel(self)
+        self.QBlabelP2.setText("QB")
+        self.QBlabelP2.resize(50, 20)
+        self.QBlabelP2.move(380, 200)
+        self.QBlabelP2.setFont(self.fontPosition)
+
+        self.RBlabelP2 = QtWidgets.QLabel(self)
+        self.RBlabelP2.setText("RB")
+        self.RBlabelP2.resize(50, 20)
+        self.RBlabelP2.move(380, 275)
+        self.RBlabelP2.setFont(self.fontPosition)
+
+        self.WRlabelP2 = QtWidgets.QLabel(self)
+        self.WRlabelP2.setText("WR")
+        self.WRlabelP2.resize(50, 20)
+        self.WRlabelP2.move(380, 350)
+        self.WRlabelP2.setFont(self.fontPosition)
+
+        self.KlabelP2 = QtWidgets.QLabel(self)
+        self.KlabelP2.setText("K")
+        self.KlabelP2.resize(50, 20)
+        self.KlabelP2.move(380, 425)
+        self.KlabelP2.setFont(self.fontPosition)
+
+        self.DEFlabelP2 = QtWidgets.QLabel(self)
+        self.DEFlabelP2.setText("DEF")
+        self.DEFlabelP2.resize(50, 20)
+        self.DEFlabelP2.move(380, 500)
+        self.DEFlabelP2.setFont(self.fontPosition)
+
+        self.show()
+        
+        
+    '''
+    def paintEvent(self, event):
+        qp = QtGui.QPainter()
+        qp.begin(self)
+        pen = qp.pen()
+        pen.setColor(QtCore.Qt.black)
+        qp.drawLine(self, 0, 350, 700, 350)
+    '''
 
 
 if __name__ == "__main__":
