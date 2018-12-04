@@ -363,6 +363,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.matchLabel.move(30, 0)
         self.matchLabel.setFont(self.fontMatch)
 
+
         #USERNAME LABELS
         self.fontUsers = QFont()
         self.fontUsers.setPointSize(18)
@@ -382,6 +383,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.usrlabelP2.resize(320, 20)
         self.usrlabelP2.move(380, 70)
         self.usrlabelP2.setFont(self.fontUsers)
+
 
         #SCORELABELS
         self.fontScores = QFont()
@@ -404,7 +406,8 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.scorelabelP2.move(500, 120)
         self.scorelabelP2.setFont(self.fontScores)
 
-        #font for player labels
+
+        #font for player positions
         self.fontPosition = QFont()
         self.fontPosition.setBold(True)
         self.fontPosition.setPointSize(14)
@@ -440,6 +443,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.DEFlabelP1.move(30, 500)
         self.DEFlabelP1.setFont(self.fontPosition)
 
+
         #p2 position labels
         self.QBlabelP2 = QtWidgets.QLabel(self)
         self.QBlabelP2.setText("QB")
@@ -470,6 +474,94 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.DEFlabelP2.resize(50, 20)
         self.DEFlabelP2.move(380, 500)
         self.DEFlabelP2.setFont(self.fontPosition)
+
+
+        #font for player names
+        self.fontPlayerName = QFont()
+        self.fontPlayerName.setPointSize(11)
+
+        #p1 player names
+        self.QBnameP1 = QtWidgets.QLabel(self)
+        #RETRIEVE ACTUAL QB P1 NAME FROM DATABASE
+        #self.QBP1 = string
+        self.QBnameP1.setText("T. Brady")
+        self.QBnameP1.resize(260, 20)
+        self.QBnameP1.move(90, 200)
+        self.QBnameP1.setFont(self.fontPlayerName)
+
+        self.RBnameP1 = QtWidgets.QLabel(self)
+        #RETRIEVE ACTUAL RB P1 NAME FROM DATABASE
+        #self.RBP1 = string
+        self.RBnameP1.setText("K. Drake")
+        self.RBnameP1.resize(260, 20)
+        self.RBnameP1.move(90, 275)
+        self.RBnameP1.setFont(self.fontPlayerName)
+
+        self.WRnameP1 = QtWidgets.QLabel(self)
+        #RETRIEVE ACTUAL WR P1 NAME FROM DATABASE
+        #self.WRP1 = string
+        self.WRnameP1.setText("B. Cooks")
+        self.WRnameP1.resize(260, 20)
+        self.WRnameP1.move(90, 350)
+        self.WRnameP1.setFont(self.fontPlayerName)
+
+        self.KnameP1 = QtWidgets.QLabel(self)
+        #RETRIEVE ACTUAL K P1 NAME FROM DATABASE
+        #self.KP1 = string
+        self.KnameP1.setText("A. Vinatieri")
+        self.KnameP1.resize(260, 20)
+        self.KnameP1.move(90, 425)
+        self.KnameP1.setFont(self.fontPlayerName)
+
+        self.DEFnameP1 = QtWidgets.QLabel(self)
+        #RETRIEVE ACTUAL DEF P1 NAME FROM DATABASE
+        #self.DEFP1 = string
+        self.DEFnameP1.setText("Dolphins")
+        self.DEFnameP1.resize(260, 20)
+        self.DEFnameP1.move(90, 500)
+        self.DEFnameP1.setFont(self.fontPlayerName)
+
+
+        #p2 player names
+        self.QBnameP2 = QtWidgets.QLabel(self)
+        #RETRIEVE ACTUAL QB P2 NAME FROM DATABASE
+        #self.QBP2 = string
+        self.QBnameP2.setText("P. Mahomes")
+        self.QBnameP2.resize(260, 20)
+        self.QBnameP2.move(440, 200)
+        self.QBnameP2.setFont(self.fontPlayerName)
+
+        self.RBnameP2 = QtWidgets.QLabel(self)
+        #RETRIEVE ACTUAL RB P2 NAME FROM DATABASE
+        #self.RBP2 = string
+        self.RBnameP2.setText("S. Barkley")
+        self.RBnameP2.resize(260, 20)
+        self.RBnameP2.move(440, 275)
+        self.RBnameP2.setFont(self.fontPlayerName)
+
+        self.WRnameP2 = QtWidgets.QLabel(self)
+        #RETRIEVE ACTUAL WR P2 NAME FROM DATABASE
+        #self.WRP2 = string
+        self.WRnameP2.setText("O. Beckham")
+        self.WRnameP2.resize(260, 20)
+        self.WRnameP2.move(440, 350)
+        self.WRnameP2.setFont(self.fontPlayerName)
+
+        self.KnameP2 = QtWidgets.QLabel(self)
+        #RETRIEVE ACTUAL K P2 NAME FROM DATABASE
+        #self.KP2 = string
+        self.KnameP2.setText("J. Tucker")
+        self.KnameP2.resize(260, 20)
+        self.KnameP2.move(440, 425)
+        self.KnameP2.setFont(self.fontPlayerName)
+
+        self.DEFnameP2 = QtWidgets.QLabel(self)
+        #RETRIEVE ACTUAL DEF P2 NAME FROM DATABASE
+        #self.DEFP2 = string
+        self.DEFnameP2.setText("Saints")
+        self.DEFnameP2.resize(260, 20)
+        self.DEFnameP2.move(440, 500)
+        self.DEFnameP2.setFont(self.fontPlayerName)
 
         self.show()
         
