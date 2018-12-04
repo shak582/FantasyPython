@@ -366,7 +366,7 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
 
 
         # Create a button in the window
-        self.draftPlayerBtn = QPushButton('Draft Player', self)
+        self.draftPlayerBtn = QPushButton('Search Player', self)
         self.draftPlayerBtn.setFixedSize(280, 40)
         self.draftPlayerBtn.clicked.connect(self.draftPlayer_clicked)
 
