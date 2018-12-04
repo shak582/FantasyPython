@@ -134,8 +134,8 @@ class LoginWidget(QtWidgets.QWidget): # Login Widget to login user
         self.Login_Username = self.loginUserTextbox.text()
         self.Login_Password = self.loginPassTextbox.text()
 
-        # By passing database checking REMEMBER TO 
-        self.parent().setCurrentIndex(HOME)
+        # By passing database checking REMEMBER TO REMOVE
+        #self.parent().setCurrentIndex(HOME)
         
         if self.Login_Username != "" and self.Login_Password != "":
             self.loginUsrPassDict = {'username': self.Login_Username, 'password': self.Login_Password}
@@ -192,7 +192,7 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
         self.Register_Password = self.regPassTextbox.text()
 
         # By passing database checking REMEBER TO REMOVE
-        self.parent().setCurrentIndex(LOGIN_REGISTER)
+        #self.parent().setCurrentIndex(LOGIN_REGISTER)
         
         if self.Register_Username!=None and self.Register_Password !=None:
             self.regUsrPassDict = {'username' : self.Register_Username, 'password' : self.Register_Password}
@@ -329,7 +329,7 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.Create_Match_Title = self.createMatchTextbox.text()
 
         # By passing database checking REMEMBER TO REMOVE
-        self.parent().setCurrentIndex(HOME)
+        #self.parent().setCurrentIndex(HOME)
         
         if self.Create_Match_Title!="":
             self.matchTitle = {'match' : self.Create_Match_Title}
