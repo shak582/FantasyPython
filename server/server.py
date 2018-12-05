@@ -94,7 +94,7 @@ def createMatch():
 			for x in players:
 				t = Player()
 				t.name = str(x)
-				t.name = t.match
+				t.match = m.match
 				t.valid = False
 				db.session.add(t)
 				db.session.commit()
