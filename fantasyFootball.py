@@ -415,14 +415,14 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
         # self.player_list.show()
 
         # By passing database checking REMEMBER TO REMOVE
-        self.parent().setCurrentIndex(MATCH)
+        #self.parent().setCurrentIndex(MATCH)
 
         
         if self.draftedPlayer!="":
-            #self.matchTitle = {'match' : self.Create_Match_Title}
-            #headers = {'Content-type' : 'application/json'}
-            #r = s.post(url = teamURL, headers=headers, data=json.dumps(self.matchTitle))
-            #print(r.text)
+            self.lastName = {'match' : self.draftedPlayer}
+            headers = {'Content-type' : 'application/json'}
+            r = s.post(url = 'http://162.243.35.210:5000/getlistplayers', headers=headers, data=json.dumps(self.astName))
+            print(r.text)
             self.parent().setCurrentIndex(MATCH)
         
         self.draftPlayerTextbox.setText("")
