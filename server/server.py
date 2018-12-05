@@ -17,6 +17,8 @@ Session(app)
 
 games = nflgame.games(2017, week=[x for x in range(1, 18)])
 players = nflgame.combine_game_stats(games)
+allplayers = set([str(x) for x in players])
+players = nflgame.combine_game_stats(games)
 passing = [x for x in players.passing()]
 players = nflgame.combine_game_stats(games)
 rushing = [x for x in players.rushing()]
@@ -86,9 +88,16 @@ def createMatch():
 			m = Match()
 			m.match = req_data['match']
 			m.player1 = session['username']
-			m.state = '1QB'
+			m.state = 'draft'
 			db.session.add(m)
 			db.session.commit()
+			for x in players:
+				t = Player()
+				t.name = str(x)
+				t.name = t.match
+				t.valid = False
+				db.session.add(t)
+				db.session.commit()
 			return jsonify({'success' : 'right shit'})
 		except Exception as e:
 			return jsonify({'error':e.args})
@@ -140,7 +149,15 @@ def getMyMatches():
 			return e.args
 	return 'not logged in'
 
-
+@app.route('/getlistplayers', methods=['POST'])
+def checkPlayer():
+	req_data = request.get_json()
+	if 'username' in session and 'match' in req_data and 'player' in req_data:
+		ps = list(filter(lambda a: req_data['player'] in a, allplayers))
+		return ' '.join(ps)
+	except Exception:
+		return False
+	return False
 
 
 # @app.route('/draftplayer', methods=['POST'])
