@@ -155,8 +155,6 @@ def checkPlayer():
 	if 'username' in session and 'match' in req_data and 'player' in req_data:
 		ps = list(filter(lambda a: req_data['player'] in a, allplayers))
 		return ' '.join(ps)
-	except Exception:
-		return False
 	return False
 
 
