@@ -431,7 +431,7 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
         # By passing database checking REMEMBER TO REMOVE
         self.isRosterFull = s.get(url= 'http://162.243.35.210:5000/isrosterfull')
         #self.plyrsCmpltdDraft = s.get(url= 'http://162.243.35.210:5000/')
-        print(self.isRosterFull)
+        print(self.isRosterFull.text)
         if self.isRosterFull != "true":
             print("Error: Roster Is Not Full")
         #if self.plyrsCmpltdDraft == 1
