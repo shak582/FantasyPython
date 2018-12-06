@@ -146,7 +146,7 @@ def getMyMatches():
 def checkPlayer():
 	req_data = request.get_json()
 	print(req_data)
-	if 'username' in session and 'match' in req_data and 'player' in req_data:
+	if 'username' in session and 'player' in req_data:
 		ps = list(filter(lambda a: req_data['player'] in a, allplayers))
 		return ' '.join(ps)
 	return 'error'
