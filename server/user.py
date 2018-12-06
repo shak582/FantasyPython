@@ -31,5 +31,5 @@ class Team(db.Model):
 class Player(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	match = db.Column(db.String(80), db.ForeignKey('match.match'), nullable=False)
-	name = db.Column(db.String(80), nullable=False, unique=True)
+	name = db.Column(db.String(80), nullable=False, unique=False)
 	valid = db.Column(db.Boolean, nullable=False, unique=False)
