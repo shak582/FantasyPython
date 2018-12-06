@@ -413,13 +413,13 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
                 self.itemClicked.connect(self.player_click)
 
             def add_players(self):  # Show list of players containing searched last name 
-                for player_text in r.text().split():
+                for player_text in r.text.split():
                     player = QListWidgetItem(player_text)
                     self.addItem(player)
 
             def player_click(self, match):
                 # Will add a player to their team's database checking their and other teams database for that player's name
-                self.playerDict = {'player' : (player.text())}
+                self.playerDict = {'player' : (str(player.text()))}
                 headers = {'Content-type' : 'application/json'}
                 r = s.post(url = 'http://162.243.35.210:5000/addplayer', headers=headers, data=json.dumps(self.playerDict))
 
