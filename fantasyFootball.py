@@ -433,6 +433,7 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
         self.plyrsCmpltdDraft = s.get(url= 'http://162.243.35.210:5000/isdraftover')
         self.plyrsCmpltdDraft = int(self.plyrsCmpltdDraft.text)
         print(self.isRosterFull.text)
+
         if self.isRosterFull.text != "true":
             print("Error: Roster Is Not Full")
         if self.plyrsCmpltdDraft == 1:
@@ -511,8 +512,9 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
         self.matchLabel = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL MATCH NAME FROM DATABASE
-        #self.matchName = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
-        self.matchLabel.setText("PYTHON FANTASY MATCH TITLE")
+        self.matchName = s.get(url= 'http://162.243.35.210:5000/getmatch')
+        self.matchName = self.matchName.text
+        self.matchLabel.setText(self.matchName)
         self.matchLabel.resize(590, 50)
         self.matchLabel.move(30, 0)
         self.matchLabel.setFont(self.fontMatch)
@@ -524,16 +526,18 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
         self.usrlabelP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL USER 1 NAME FROM DATABASE
-        #self.user1Name = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
-        self.usrlabelP1.setText("USER 1")
+        self.user1Name = s.get(url= 'http://162.243.35.210:5000/getplayer1')
+        self.user1Name = self.user1Name.text
+        self.usrlabelP1.setText(self.user1Name)
         self.usrlabelP1.resize(320, 20)
         self.usrlabelP1.move(30, 70)
         self.usrlabelP1.setFont(self.fontUsers)
 
         self.usrlabelP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL USER 2 NAME FROM DATABASE
-        #self.user2Name = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
-        self.usrlabelP2.setText("USER 2")
+        self.user2Name = s.get(url= 'http://162.243.35.210:5000/getplayer2')
+        self.user2Name = self.user2Name.text
+        self.usrlabelP2.setText(self.user2Name)
         self.usrlabelP2.resize(320, 20)
         self.usrlabelP2.move(380, 70)
         self.usrlabelP2.setFont(self.fontUsers)
