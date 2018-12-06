@@ -16,7 +16,7 @@ class Match(db.Model):
 	match = db.Column(db.String(80), unique = True, nullable = False)
 	player1 = db.Column(db.String(80), db.ForeignKey('user.username'), nullable = False, unique=True)
 	player2 = db.Column(db.String(80), db.ForeignKey('user.username'), nullable=True, unique=True)
-	state = db.Column(db.String(80), nullable=False)
+	state = db.Column(db.Integer, nullable=False)
 
 class Team(db.Model):
 	id = db.Column(db.Integer, primary_key=True)

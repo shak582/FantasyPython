@@ -88,7 +88,7 @@ def createMatch():
 			m = Match()
 			m.match = req_data['match']
 			m.player1 = session['username']
-			m.state = 'draft'
+			m.state = 0
 			db.session.add(m)
 			db.session.commit()
 			t = Team()
@@ -184,21 +184,28 @@ def addPlayer():
 	return 'error'
 
 
-
-
-# @app.route('/draftplayer', methods=['POST'])
-# def draftplayer():
-# 	req_data = request.get_json()
-# 	if 'match' in req_data and 'player' in req_data:
-# 		try:
-# 			m = Match.query.filter_by(req_data['match'])
-# 			if not m:
-# 				return 'error no match like that exists'
-
-# 		except Exception:
-# 			return 'error'
-
-
+@app.route('/isrosterfull', methods=['GET'])
+def isRosterFull():
+	req_data = request.get_json()
+	print req_data
+	if 'username' in session:
+		try:
+			t = Team.query.filter_by(player=session['username']).first()
+			if t.QB == None:
+				return 'false'
+			if t.RB == None:
+				return 'false'
+			if t.WR == None:
+				return 'false'
+			if t.K == None:
+				return 'false'
+			m = Match.query.filter_by(match=t.match).first()
+			m.state = m.state + 1
+			s.session.commit()
+			return 'true'
+		except Exception:
+			return 'false'
+	return 'flase'
 
 
 app.run()
