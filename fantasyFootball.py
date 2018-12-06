@@ -430,14 +430,15 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
     def finishDraft_clicked(self):
         # By passing database checking REMEMBER TO REMOVE
         self.isRosterFull = s.get(url= 'http://162.243.35.210:5000/isrosterfull')
-        #self.plyrsCmpltdDraft = s.get(url= 'http://162.243.35.210:5000/')
+        self.plyrsCmpltdDraft = int(s.get(url= 'http://162.243.35.210:5000/isdraftover'))
         print(self.isRosterFull.text)
         if self.isRosterFull.text != "true":
             print("Error: Roster Is Not Full")
-        #if self.plyrsCmpltdDraft == 1
-        #print("Next Players Turn")
-        #if self.plyrsCmpltdDraft == 2    
-        #self.parent().setCurrentIndex(MATCH)
+        if self.plyrsCmpltdDraft == 1:
+            print("Next Players Turn")
+        elif self.plyrsCmpltdDraft == 2:
+            print(Draft Complete)  
+            self.parent().setCurrentIndex(MATCH)
 
     def back_clicked(self):
         self.parent().setCurrentIndex(HOME)
@@ -472,9 +473,9 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KP1score = self.KP1extraPts/1 + self.KP1fg*3
 
         #find what def statistics are on API
-        self.DEFP1score = 6.0
+        #self.DEFP1score = 6.0
 
-        self.scoreP1= self.QBP1score + self.RBP1score + self.WRP1score + self.KP1score + self.DEFP1score
+        self.scoreP1= self.QBP1score + self.RBP1score + self.WRP1score + self.KP1score #+ self.DEFP1score
 
     #calculate p2 scores
 
@@ -497,9 +498,9 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KP2score = self.KP2extraPts/1 + self.KP2fg*3
 
         #find what def statistics are on API
-        self.DEFP2score = 4.0
+        #self.DEFP2score = 4.0
 
-        self.scoreP2= self.QBP2score + self.RBP2score + self.WRP2score + self.KP2score + self.DEFP2score
+        self.scoreP2= self.QBP2score + self.RBP2score + self.WRP2score + self.KP2score #+ self.DEFP2score
 
 
     #Match Label
@@ -588,12 +589,13 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KlabelP1.resize(50, 20)
         self.KlabelP1.move(30, 425)
         self.KlabelP1.setFont(self.fontPosition)
-
+        '''
         self.DEFlabelP1 = QtWidgets.QLabel(self)
         self.DEFlabelP1.setText("DEF")
         self.DEFlabelP1.resize(50, 20)
         self.DEFlabelP1.move(30, 500)
         self.DEFlabelP1.setFont(self.fontPosition)
+        '''
 
 
     #p2 position labels
@@ -620,13 +622,13 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KlabelP2.resize(50, 20)
         self.KlabelP2.move(380, 425)
         self.KlabelP2.setFont(self.fontPosition)
-
+        '''
         self.DEFlabelP2 = QtWidgets.QLabel(self)
         self.DEFlabelP2.setText("DEF")
         self.DEFlabelP2.resize(50, 20)
         self.DEFlabelP2.move(380, 500)
         self.DEFlabelP2.setFont(self.fontPosition)
-
+        '''
 
     #font for player names
         self.fontPlayerName = QFont()
@@ -664,7 +666,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KnameP1.resize(200, 20)
         self.KnameP1.move(90, 425)
         self.KnameP1.setFont(self.fontPlayerName)
-
+        '''
         self.DEFnameP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL DEF P1 NAME FROM DATABASE
         #self.DEFP1 = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
@@ -672,6 +674,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.DEFnameP1.resize(200, 20)
         self.DEFnameP1.move(90, 500)
         self.DEFnameP1.setFont(self.fontPlayerName)
+        '''
 
 
     #p2 player names
@@ -706,7 +709,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KnameP2.resize(200, 20)
         self.KnameP2.move(440, 425)
         self.KnameP2.setFont(self.fontPlayerName)
-
+        '''
         self.DEFnameP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL DEF P2 NAME FROM DATABASE
         #self.DEFP2 = string
@@ -714,6 +717,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.DEFnameP2.resize(200, 20)
         self.DEFnameP2.move(440, 500)
         self.DEFnameP2.setFont(self.fontPlayerName)
+        '''
 
 
     #font for player scores
@@ -752,7 +756,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KscoreP1.resize(60, 20)
         self.KscoreP1.move(290, 425)
         self.KscoreP1.setFont(self.fontPlayerScore)
-
+        '''
         self.DEFscoreP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL DEF P1 score FROM DATABASE
         self.DEFP1scoreStr = str(self.DEFP1score) + " pts"
@@ -760,7 +764,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.DEFscoreP1.resize(60, 20)
         self.DEFscoreP1.move(290, 500)
         self.DEFscoreP1.setFont(self.fontPlayerScore)
-
+        '''
     #p2 player scores
         self.QBscoreP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL QB P2 score FROM DATABASE
@@ -793,7 +797,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KscoreP2.resize(60, 20)
         self.KscoreP2.move(640, 425)
         self.KscoreP2.setFont(self.fontPlayerScore)
-
+        '''
         self.DEFscoreP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL DEF P2 score FROM DATABASE
         self.DEFP2scoreStr = str(self.DEFP2score) + " pts"
@@ -801,6 +805,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.DEFscoreP2.resize(60, 20)
         self.DEFscoreP2.move(640, 500)
         self.DEFscoreP2.setFont(self.fontPlayerScore)
+        '''
 
     def goHome_clicked(self):
         self.parent().setCurrentIndex(HOME)
