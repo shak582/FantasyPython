@@ -107,9 +107,11 @@ class LoginWidget(QtWidgets.QWidget): # Login Widget to login user
 
         self.loginUserTextbox = QtWidgets.QLineEdit(self)
         self.loginUserTextbox.setFixedSize(280, 40)
+        self.loginUserTextbox.setPlaceholderText("Enter Username")
 
         self.loginPassTextbox = QtWidgets.QLineEdit(self)
         self.loginPassTextbox.setFixedSize(280, 40)
+        self.loginPassTextbox.setPlaceholderText("Enter Password")
 
         self.loginBtn = QtWidgets.QPushButton('Login', self)
         self.loginBtn.setFixedSize(280, 40)
@@ -137,6 +139,7 @@ class LoginWidget(QtWidgets.QWidget): # Login Widget to login user
     def login_click(self):
         self.Login_Username = self.loginUserTextbox.text()
         self.Login_Password = self.loginPassTextbox.text()
+        print(self.Login_Username)
 
         # By passing database checking REMEMBER TO REMOVE
         #self.parent().setCurrentIndex(HOME)
@@ -148,8 +151,16 @@ class LoginWidget(QtWidgets.QWidget): # Login Widget to login user
             print(r.text)
             if r.text == "success":
                 self.parent().setCurrentIndex(HOME)
-        self.loginUserTextbox.setText("")
-        self.loginPassTextbox.setText("")
+            else:
+                self.login_error = QMessageBox()
+                self.login_error.resize(50,50)
+                self.login_error.move(80,320)
+                self.login_error.setWindowTitle("Error")
+                self.login_error.setText("Incorrect\nUsername/Password")
+                self.login_error.show()
+
+            self.loginUserTextbox.setText("")
+            self.loginPassTextbox.setText("")
     
 
 
@@ -165,9 +176,12 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
 
         self.regUserTextbox = QLineEdit(self)
         self.regUserTextbox.setFixedSize(280, 40)
+        self.regUserTextbox.setPlaceholderText("Create Username")
 
         self.regPassTextbox = QLineEdit(self)
         self.regPassTextbox.setFixedSize(280, 40)
+        self.regPassTextbox.setPlaceholderText("Create Password")
+
         # Create a button in the window
         self.registerBtn = QPushButton('Register', self)
         self.registerBtn.setFixedSize(280, 40)
@@ -205,6 +219,8 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
             print(r.text)
             self.parent().setCurrentIndex(LOGIN_REGISTER)
         
+        #error box for if user already exists
+
         self.regUserTextbox.setText("")
         self.regPassTextbox.setText("")
 
@@ -267,6 +283,14 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
                 self.joinMatchDict = {'match' : (str(match.text()))}
                 headers = {'Content-type' : 'application/json'}
                 r = s.post(url = 'http://162.243.35.210:5000/joinmatch', headers=headers, data=json.dumps(self.joinMatchDict))
+                self.matchJoined = QMessageBox()
+                self.matchJoined.resize(50,50)
+                self.matchJoined.move(80,320)
+                self.matchJoined.setWindowTitle("Success")
+                self.matchJoined.setText("Match Joined!")
+                self.matchJoined.show()
+                self.parent().setCurrentIndex(HOME)
+
 
 
         self.matchlist = MatchList()
@@ -297,6 +321,12 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
         
     def logout_click(self):
         s.get(url='http://162.243.35.210:5000/exit')
+        self.logout_success = QMessageBox()
+        self.logout_success.resize(50,50)
+        self.logout_success.move(80,320)
+        self.logout_success.setWindowTitle("Success")
+        self.logout_success.setText("Logout Succesful")
+        self.logout_success.show()
         self.parent().setCurrentIndex(LOGIN_REGISTER)
         
 
@@ -312,6 +342,7 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
         self.createMatchTextbox = QLineEdit(self)
         self.createMatchTextbox.setFixedSize(280,40)
+        self.createMatchTextbox.setPlaceholderText("Create New Match Title")
 
 
         # Create a button in the window
@@ -343,7 +374,15 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
             headers = {'Content-type' : 'application/json'}
             r = s.post(url = url3, headers=headers, data=json.dumps(self.matchTitle))
             print(r.text)
+            self.matchCreated = QMessageBox()
+            self.matchCreated.resize(50,50)
+            self.matchCreated.move(80,320)
+            self.matchCreated.setWindowTitle("Success")
+            self.matchCreated.setText("Match Created!")
+            self.matchCreated.show()
             self.parent().setCurrentIndex(HOME)
+
+
         
         self.createMatchTextbox.setText("")
         self.Create_Match_Title = ""
@@ -363,7 +402,7 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
 
         self.draftPlayerTextbox = QLineEdit(self)
         self.draftPlayerTextbox.setFixedSize(280,40)
-
+        self.draftPlayerTextbox.setPlaceholderText("Search Player By Last Name")
 
         # Search player button
         self.draftPlayerBtn = QPushButton('Search Player', self)
@@ -391,10 +430,6 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
  
     def draftPlayer_clicked(self):
         self.draftedPlayer = self.draftPlayerTextbox.text()
-
-        # By passing database checking REMEMBER TO REMOVE
-        #self.parent().setCurrentIndex(MATCH)
-
         
         if self.draftedPlayer!="":
             self.lastName = {'player' : self.draftedPlayer}
@@ -428,18 +463,33 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
 
 
     def finishDraft_clicked(self):
-        # By passing database checking REMEMBER TO REMOVE
         self.isRosterFull = s.get(url= 'http://162.243.35.210:5000/isrosterfull')
         self.plyrsCmpltdDraft = s.get(url= 'http://162.243.35.210:5000/isdraftover')
         self.plyrsCmpltdDraft = int(self.plyrsCmpltdDraft.text)
         print(self.isRosterFull.text)
 
         if self.isRosterFull.text != "true":
-            print("Error: Roster Is Not Full")
+            self.rosterFull_error = QMessageBox()
+            self.rosterFull_error.resize(50,50)
+            self.rosterFull_error.move(80,320)
+            self.rosterFull_error.setWindowTitle("Error")
+            self.rosterFull_error.setText("Roster Is Not Full")
+            self.rosterFull_error.show()
+
         if self.plyrsCmpltdDraft == 1:
-            print("Next Players Turn")
+            self.oneCmpltdDraft = QMessageBox()
+            self.oneCmpltdDraft.resize(50,50)
+            self.oneCmpltdDraft.move(80,320)
+            self.oneCmpltdDraft.setWindowTitle("Success")
+            self.oneCmpltdDraft.setText("P1 Picks Are In!\nNext Player's Turn!")
+            self.oneCmpltdDraft.show()
         elif self.plyrsCmpltdDraft == 2:
-            print("Draft Complete")  
+            self.twoCmpltdDraft = QMessageBox()
+            self.twoCmpltdDraft.resize(50,50)
+            self.twoCmpltdDraft.move(80,320)
+            self.twoCmpltdDraft.setWindowTitle("Success")
+            self.twoCmpltdDraft.setText("P2 Picks Are In!\nDraft Complete!")
+            self.twoCmpltdDraft.show()
             self.parent().setCurrentIndex(MATCH)
 
     def back_clicked(self):
