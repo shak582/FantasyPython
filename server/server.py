@@ -189,7 +189,6 @@ def isRosterFull():
 	if 'username' in session:
 		try:
 			t = Team.query.filter_by(player=session['username']).first()
-			print(t.QB,t.RB,t.WR,t.k)
 			if t.QB == None:
 				return 'QBfalse'
 			if t.RB == None:
@@ -200,10 +199,10 @@ def isRosterFull():
 				return 'Kfalse'
 			m = Match.query.filter_by(match=t.match).first()
 			m.state = m.state + 1
-			s.session.commit()
+			db.session.commit()
 			return 'true'
 		except Exception as e:
-			return e.args
+			return str(e.args)
 	return 'flase'
 
 
