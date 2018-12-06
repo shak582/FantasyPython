@@ -504,7 +504,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
         self.scoreP2= self.QBP2score + self.RBP2score + self.WRP2score + self.KP2score #+ self.DEFP2score
 
-        nothin=0
+        nothing=0
     #Match Label
         self.fontMatch = QFont()
         self.fontMatch.setBold(True)
