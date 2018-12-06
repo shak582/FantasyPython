@@ -205,5 +205,17 @@ def isRosterFull():
 			return str(e.args)
 	return 'flase'
 
+@app.route('/isdraftover', methods=['GET'])
+def isDraftOver():
+	if 'username' in session:
+		try:
+			t = Team.query.filter_by(player=session['username']).first()
+			m = Match.query.filter_by(match=t.match).first()
+			return str(m.state)
+		except Exception as e:
+			return str(e.args)
+	return str(0)
+
+
 
 app.run()
