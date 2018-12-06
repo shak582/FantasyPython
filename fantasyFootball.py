@@ -639,11 +639,16 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.fontPlayerName = QFont()
         self.fontPlayerName.setPointSize(11)
 
+        self.playerNames = s.get(url= 'http://162.243.35.210:5000/getplayers')
+        self.playerNames = self.playerNames.text.split():   
+
+
     #p1 player names
         self.QBnameP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL QB P1 NAME FROM DATABASE
         #self.QBP1 = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
-        self.QBnameP1.setText("T. Brady")
+        #self.playerNames[0]
+        self.QBnameP1.setText(self.playerNames[0])
         self.QBnameP1.resize(200, 20)
         self.QBnameP1.move(90, 200)
         self.QBnameP1.setFont(self.fontPlayerName)
@@ -651,7 +656,8 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.RBnameP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL RB P1 NAME FROM DATABASE
         #self.RBP1 = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
-        self.RBnameP1.setText("K. Drake")
+        #self.playerNames[1]
+        self.RBnameP1.setText(self.playerNames[1])
         self.RBnameP1.resize(200, 20)
         self.RBnameP1.move(90, 275)
         self.RBnameP1.setFont(self.fontPlayerName)
@@ -659,7 +665,8 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.WRnameP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL WR P1 NAME FROM DATABASE
         #self.WRP1 = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
-        self.WRnameP1.setText("B. Cooks")
+        #self.playerNames[2]
+        self.WRnameP1.setText(self.playerNames[2])
         self.WRnameP1.resize(200, 20)
         self.WRnameP1.move(90, 350)
         self.WRnameP1.setFont(self.fontPlayerName)
@@ -667,7 +674,8 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KnameP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL K P1 NAME FROM DATABASE
         #self.KP1 = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
-        self.KnameP1.setText("A. Vinatieri")
+        #self.playerNames[3]
+        self.KnameP1.setText(self.playerNames[3])
         self.KnameP1.resize(200, 20)
         self.KnameP1.move(90, 425)
         self.KnameP1.setFont(self.fontPlayerName)
@@ -686,7 +694,8 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.QBnameP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL QB P2 NAME FROM DATABASE
         #self.QBP2 = string
-        self.QBnameP2.setText("P. Mahomes")
+        #self.playerNames[4]
+        self.QBnameP2.setText(self.playerNames[4])
         self.QBnameP2.resize(200, 20)
         self.QBnameP2.move(440, 200)
         self.QBnameP2.setFont(self.fontPlayerName)
@@ -694,7 +703,8 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.RBnameP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL RB P2 NAME FROM DATABASE
         #self.RBP2 = string
-        self.RBnameP2.setText("S. Barkley")
+        #self.playerNames[5]
+        self.RBnameP2.setText(self.playerNames[5])
         self.RBnameP2.resize(200, 20)
         self.RBnameP2.move(440, 275)
         self.RBnameP2.setFont(self.fontPlayerName)
@@ -702,7 +712,8 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.WRnameP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL WR P2 NAME FROM DATABASE
         #self.WRP2 = string
-        self.WRnameP2.setText("O. Beckham")
+        #self.playerNames[6]
+        self.WRnameP2.setText(self.playerNames[6])
         self.WRnameP2.resize(200, 20)
         self.WRnameP2.move(440, 350)
         self.WRnameP2.setFont(self.fontPlayerName)
@@ -710,7 +721,8 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KnameP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL K P2 NAME FROM DATABASE
         #self.KP2 = string
-        self.KnameP2.setText("J. Tucker")
+        #self.playerNames[7]
+        self.KnameP2.setText(self.playerNames[7])
         self.KnameP2.resize(200, 20)
         self.KnameP2.move(440, 425)
         self.KnameP2.setFont(self.fontPlayerName)
