@@ -419,7 +419,7 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
 
             def player_click(self, match):
                 # Will add a player to their team's database checking their and other teams database for that player's name
-                self.playerDict = {'player' : (str(player.text()))}
+                self.playerDict = {'player' : (player.text())}
                 headers = {'Content-type' : 'application/json'}
                 r = s.post(url = 'http://162.243.35.210:5000/addplayer', headers=headers, data=json.dumps(self.playerDict))
 
