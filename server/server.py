@@ -216,6 +216,39 @@ def isDraftOver():
 			return str(e.args)
 	return str(0)
 
+@app.route('/getmatch', methods=['GET'])
+def getDraft():
+	if 'username' in session:
+		try:
+			t = Team.query.filter_by(player=session['username']).first()
+			m = Match.query.filter_by(match=t.match).first()
+			return m.match
+		except Exception as e:
+			return str(e.args)
+	return 'error'
+
+
+@app.route('/getplayer1', methods=['GET'])
+def getP1():
+	if 'username' in session:
+		try:
+			t = Team.query.filter_by(player=session['username']).first()
+			m = Match.query.filter_by(match=t.match).first()
+			return m.player1
+		except Exception as e:
+			return str(e.args)
+	return 'error'
+
+@app.route('/getplayer2', methods=['GET'])
+def getP1():
+	if 'username' in session:
+		try:
+			t = Team.query.filter_by(player=session['username']).first()
+			m = Match.query.filter_by(match=t.match).first()
+			return m.player2
+		except Exception as e:
+			return str(e.args)
+	return 'error'
 
 
 app.run()
