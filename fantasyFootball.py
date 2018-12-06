@@ -392,28 +392,6 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
     def draftPlayer_clicked(self):
         self.draftedPlayer = self.draftPlayerTextbox.text()
 
-        # if self.draftedPlayer != ""
-        class PlayerList(QListWidget):
-            def __init__(self):
-                QListWidget.__init__(self)
-                self.add_players()
-                self.itemClicked.connect(self.player_click)
-
-            def add_players(self):  # Show list of players containing searched last name 
-                '''self.lastName_list = s.get(url= 'list of players being returned from API with this last name')
-                for player_text in self.lastName_list.text.split('\n'):
-                    player = QListWidgetItem(player_text)
-                    self.addItem(player)'''
-
-            def player_click(self, match):
-                # Will add a player to their team's database checking their and other teams database for that player's name
-                '''self.playerDict = {'player' : (str(player.text()))}
-                headers = {'Content-type' : 'application/json'}
-                r = s.post(url = 'url to add player to player's team database', headers=headers, data=json.dumps(self.playerDict))'''
-
-        # self.player_list = PlayerList(self)
-        # self.player_list.show()
-
         # By passing database checking REMEMBER TO REMOVE
         #self.parent().setCurrentIndex(MATCH)
 
@@ -426,6 +404,29 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
             #self.parent().setCurrentIndex(MATCH)
         
         self.draftPlayerTextbox.setText("")
+
+        # if self.draftedPlayer != ""
+        class PlayerList(QListWidget):
+            def __init__(self):
+                QListWidget.__init__(self)
+                self.add_players()
+                self.itemClicked.connect(self.player_click)
+
+            def add_players(self):  # Show list of players containing searched last name 
+                self.lastName_list = s.get(url= 'list of players being returned from API with this last name')
+                for player_text in self.lastName_list.text.split():
+                    player = QListWidgetItem(player_text)
+                    self.addItem(player)
+
+            def player_click(self, match):
+                # Will add a player to their team's database checking their and other teams database for that player's name
+                self.playerDict = {'player' : (str(player.text()))}
+                headers = {'Content-type' : 'application/json'}
+                r = s.post(url = 'url to add player to player', headers=headers, data=json.dumps(self.playerDict))
+
+        self.player_list = PlayerList(self)
+        self.player_list.show()
+
 
     def finishDraft_clicked(self):
         # By passing database checking REMEMBER TO REMOVE
