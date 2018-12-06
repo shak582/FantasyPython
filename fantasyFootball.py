@@ -419,7 +419,7 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
 
         
         if self.draftedPlayer!="":
-            self.lastName = {'match' : self.draftedPlayer}
+            self.lastName = {'player' : self.draftedPlayer}
             headers = {'Content-type' : 'application/json'}
             r = s.post(url = 'http://162.243.35.210:5000/getlistplayers', headers=headers, data=json.dumps(self.astName))
             print(r.text)
