@@ -91,13 +91,6 @@ def createMatch():
 			m.state = 'draft'
 			db.session.add(m)
 			db.session.commit()
-			for x in players:
-				t = Player()
-				t.name = str(x)
-				t.match = m.match
-				t.valid = False
-				db.session.add(t)
-				db.session.commit()
 			return jsonify({'success' : 'right shit'})
 		except Exception as e:
 			return jsonify({'error':e.args})

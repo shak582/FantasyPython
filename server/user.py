@@ -27,9 +27,3 @@ class Team(db.Model):
 	WR = db.Column(db.String(80), unique=False, nullable=True)
 	K = db.Column(db.String(80), unique=False, nullable=True)
 	TE = db.Column(db.String(80), unique=False, nullable=True)
-
-class Player(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	match = db.Column(db.String(80), db.ForeignKey('match.match'), nullable=False)
-	name = db.Column(db.String(80), nullable=False, unique=False)
-	valid = db.Column(db.Boolean, nullable=False, unique=False)
