@@ -517,6 +517,10 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         #self.matchStats()
 
     def matchStats(self):
+        #Necessary
+        #self.setStyleSheet("QMainWindow {background: '#009900';}");
+        #self.parent().titleLabel.setText("")
+        
     #Return Home Button
         self.goHome_button = QtWidgets.QPushButton("Go Home", self)
         self.goHome_button.setFixedSize(75, 40)
