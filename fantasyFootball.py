@@ -423,7 +423,7 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
                 headers = {'Content-type' : 'application/json'}
                 r = s.post(url = 'http://162.243.35.210:5000/addplayer', headers=headers, data=json.dumps(self.playerDict))
 
-        self.player_list = PlayerList(self)
+        self.player_list = PlayerList()
         self.player_list.show()
 
 
