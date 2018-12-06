@@ -417,7 +417,7 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
                     player = QListWidgetItem(player_text)
                     self.addItem(player)
 
-            def player_click(self, match):
+            def player_click(self, player):
                 # Will add a player to their team's database checking their and other teams database for that player's name
                 self.playerDict = {'player' : (str(player.text()))}
                 headers = {'Content-type' : 'application/json'}
