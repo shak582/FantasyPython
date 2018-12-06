@@ -640,6 +640,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
         self.playerNames = s.get(url= 'http://162.243.35.210:5000/getplayers')
         self.playerNames = self.playerNames.text.split()
+        print(self.playerNames.text)
 
 
     #p1 player names
