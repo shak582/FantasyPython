@@ -296,8 +296,8 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
             '''
         
     def logout_click(self):
-        self.parent().setCurrentIndex(LOGIN_REGISTER)
         s.get(url='http://162.243.35.210:5000/exit')
+        self.parent().setCurrentIndex(LOGIN_REGISTER)
         
 
 class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
@@ -504,7 +504,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
         self.scoreP2= self.QBP2score + self.RBP2score + self.WRP2score + self.KP2score #+ self.DEFP2score
 
-
+        nothin=0
     #Match Label
         self.fontMatch = QFont()
         self.fontMatch.setBold(True)
@@ -512,12 +512,13 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
         self.matchLabel = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL MATCH NAME FROM DATABASE
-        self.matchName = s.get(url= 'http://162.243.35.210:5000/getmatch')
-        self.matchName = self.matchName.text
-        self.matchLabel.setText(self.matchName)
-        self.matchLabel.resize(590, 50)
-        self.matchLabel.move(30, 0)
-        self.matchLabel.setFont(self.fontMatch)
+        if nothing == 1:
+            self.matchName = s.get(url= 'http://162.243.35.210:5000/getmatch')
+            self.matchName = self.matchName.text
+            self.matchLabel.setText(self.matchName)
+            self.matchLabel.resize(590, 50)
+            self.matchLabel.move(30, 0)
+            self.matchLabel.setFont(self.fontMatch)
 
 
     #USERNAME LABELS
