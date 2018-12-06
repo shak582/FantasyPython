@@ -240,12 +240,29 @@ def getP1():
 	return 'error'
 
 @app.route('/getplayer2', methods=['GET'])
-def getP1():
+def getP2():
 	if 'username' in session:
 		try:
 			t = Team.query.filter_by(player=session['username']).first()
 			m = Match.query.filter_by(match=t.match).first()
 			return m.player2
+		except Exception as e:
+			return str(e.args)
+	return 'error'
+
+@app.route('/getplayers', methods=['GET'])
+def getplayers():
+	if 'username' in session:
+		try:
+			t = Team.query.filter_by(player=session['username']).first()
+			m = Match.query.filter_by(match=t.match).first()
+			if m.player1 == t.player:
+				t2 = Team.query.filter_by(player=m.player2).first()
+			else:
+				t2 = Team.query.filter_by(playeyr=m.player1).first()
+			s = t.QB + ' ' + T.RB + ' ' + t.WR + ' ' + t.K
+			s += ' ' + t2.QB + ' ' + t2.RB + ' ' + t2.WR + ' ' + t2.K
+			return s
 		except Exception as e:
 			return str(e.args)
 	return 'error'
