@@ -260,7 +260,7 @@ def getplayers():
 				t2 = Team.query.filter_by(player=m.player2).first()
 			else:
 				t2 = Team.query.filter_by(player=m.player1).first()
-			s = t.QB + ' ' + T.RB + ' ' + t.WR + ' ' + t.K
+			s = t.QB + ' ' + t.RB + ' ' + t.WR + ' ' + t.K
 			s += ' ' + t2.QB + ' ' + t2.RB + ' ' + t2.WR + ' ' + t2.K
 			return s
 		except Exception as e:
