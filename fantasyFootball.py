@@ -82,6 +82,7 @@ class MainWindow(QtWidgets.QMainWindow):  # Main Window
 class LoginRegisterWidget(QtWidgets.QWidget):  # Normal LoginPage
     def __init__(self, parent):
         QtWidgets.QWidget.__init__(self, parent)
+        #MainWindow.__init__(self)
         self.setup()
 
     def setup(self):
