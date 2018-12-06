@@ -145,10 +145,11 @@ def getMyMatches():
 @app.route('/getlistplayers', methods=['POST'])
 def checkPlayer():
 	req_data = request.get_json()
+	print(req_data)
 	if 'username' in session and 'match' in req_data and 'player' in req_data:
 		ps = list(filter(lambda a: req_data['player'] in a, allplayers))
 		return ' '.join(ps)
-	return False
+	return 'error'
 
 
 # @app.route('/draftplayer', methods=['POST'])
