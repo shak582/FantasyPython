@@ -432,7 +432,7 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
         self.isRosterFull = s.get(url= 'http://162.243.35.210:5000/isrosterfull')
         #self.plyrsCmpltdDraft = s.get(url= 'http://162.243.35.210:5000/')
         print(self.isRosterFull.text)
-        if self.isRosterFull != "true":
+        if self.isRosterFull.text != "true":
             print("Error: Roster Is Not Full")
         #if self.plyrsCmpltdDraft == 1
         #print("Next Players Turn")
@@ -509,7 +509,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
         self.matchLabel = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL MATCH NAME FROM DATABASE
-        #self.matchName = string
+        #self.matchName = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
         self.matchLabel.setText("PYTHON FANTASY MATCH TITLE")
         self.matchLabel.resize(590, 50)
         self.matchLabel.move(30, 0)
@@ -522,7 +522,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
         self.usrlabelP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL USER 1 NAME FROM DATABASE
-        #self.user1Name = string
+        #self.user1Name = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
         self.usrlabelP1.setText("USER 1")
         self.usrlabelP1.resize(320, 20)
         self.usrlabelP1.move(30, 70)
@@ -530,7 +530,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
         self.usrlabelP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL USER 2 NAME FROM DATABASE
-        #self.user2Name = string
+        #self.user2Name = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
         self.usrlabelP2.setText("USER 2")
         self.usrlabelP2.resize(320, 20)
         self.usrlabelP2.move(380, 70)
@@ -635,7 +635,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
     #p1 player names
         self.QBnameP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL QB P1 NAME FROM DATABASE
-        #self.QBP1 = string
+        #self.QBP1 = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
         self.QBnameP1.setText("T. Brady")
         self.QBnameP1.resize(200, 20)
         self.QBnameP1.move(90, 200)
@@ -643,7 +643,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
         self.RBnameP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL RB P1 NAME FROM DATABASE
-        #self.RBP1 = string
+        #self.RBP1 = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
         self.RBnameP1.setText("K. Drake")
         self.RBnameP1.resize(200, 20)
         self.RBnameP1.move(90, 275)
@@ -651,7 +651,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
         self.WRnameP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL WR P1 NAME FROM DATABASE
-        #self.WRP1 = string
+        #self.WRP1 = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
         self.WRnameP1.setText("B. Cooks")
         self.WRnameP1.resize(200, 20)
         self.WRnameP1.move(90, 350)
@@ -659,7 +659,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
         self.KnameP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL K P1 NAME FROM DATABASE
-        #self.KP1 = string
+        #self.KP1 = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
         self.KnameP1.setText("A. Vinatieri")
         self.KnameP1.resize(200, 20)
         self.KnameP1.move(90, 425)
@@ -667,7 +667,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
         self.DEFnameP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL DEF P1 NAME FROM DATABASE
-        #self.DEFP1 = string
+        #self.DEFP1 = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
         self.DEFnameP1.setText("Dolphins")
         self.DEFnameP1.resize(200, 20)
         self.DEFnameP1.move(90, 500)
