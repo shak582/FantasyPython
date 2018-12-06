@@ -91,6 +91,11 @@ def createMatch():
 			m.state = 'draft'
 			db.session.add(m)
 			db.session.commit()
+			t = Team()
+			t.match = m.match
+			t.player = session['username']
+			db.session.add(t)
+			db.session.commit()
 			return jsonify({'success' : 'right shit'})
 		except Exception as e:
 			return jsonify({'error':e.args})
@@ -108,6 +113,11 @@ def joinMatch():
 			if m.player1 == session['username']:
 				return jsonify({'error' : 'user is already in match'})
 			m.player2 = session['username']
+			db.session.commit()
+			t = Team()
+			t.match = m.match
+			t.player = session['username']
+			db.session.add(t)
 			db.session.commit()
 			return 'success'
 		except Exception as e:
@@ -150,6 +160,30 @@ def checkPlayer():
 		ps = list(filter(lambda a: req_data['player'] in a, allplayers))
 		return ' '.join(ps)
 	return 'error'
+
+@app.route('/addplayer', methods=['POST'])
+def addPlayer():
+	req_data = request.get_json()
+	print req_data
+	if 'username' in session and 'player' in req_data:
+		try:
+			ps = req_data['player']
+			t = Team.query.filter_by(player=session['username']).first()
+			if ps in [str(x) for x in passing]:
+				t.QB = ps
+			elif ps in [str(x) for x in rushing]:
+				t.RB = ps
+			elif ps in [str(x) for x in receiver]:
+				t.WR = ps 
+			elif ps in [str(x) for x in kicking]:
+				t.K = ps
+			db.session.commit()
+			return 'success'
+		except Exception:
+			return 'success'
+	return 'error'
+
+
 
 
 # @app.route('/draftplayer', methods=['POST'])
