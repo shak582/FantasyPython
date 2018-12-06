@@ -429,6 +429,10 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
 
     def finishDraft_clicked(self):
         # By passing database checking REMEMBER TO REMOVE
+        self.isRosterFull = s.get(url= 'http://162.243.35.210:5000/isrosterfull')
+        if self.isRosterFull != "true":
+            print("Error: Roster Is Not Full")
+
         self.parent().setCurrentIndex(MATCH)
 
     def back_clicked(self):
