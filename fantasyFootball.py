@@ -36,7 +36,20 @@ class MainWindow(QtWidgets.QMainWindow):  # Main Window
     def setup(self):
         self.setGeometry(0, 0, 700, 700)
         self.setFixedSize(700, 700)  # eliminating resizing
-        self.setWindowTitle("Fantasy Football")
+        self.setWindowTitle("Hardcore Fantasy Football")
+        self.setStyleSheet("QMainWindow {background: 'darkGreen';}");
+
+        #Title Font
+        self.fontTitle = QFont()
+        self.fontTitle.setBold(True)
+        self.fontTitle.setPointSize(35)
+
+        self.titleLabel = QtWidgets.QLabel(self)
+        self.titleLabel.setText("Hardcore Fantasy Football")
+        self.titleLabel.resize(590, 50)
+        self.titleLabel.move(55, 100)
+        self.titleLabel.setFont(self.fontTitle)
+        self.titleLabel.setStyleSheet("QLabel {color: 'yellow';}");
 
         self.PageStack = QStackedWidget(self)
 
