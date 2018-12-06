@@ -37,8 +37,8 @@ class MainWindow(QtWidgets.QMainWindow):  # Main Window
         self.setGeometry(0, 0, 700, 700)
         self.setFixedSize(700, 700)  # eliminating resizing
         self.setWindowTitle("Hardcore Fantasy Football")
-        self.setStyleSheet("QMainWindow {background: '#009900';}");
-        #self.setStyleSheet("QMainWindow {background-image: url(background.png);}");
+        #self.setStyleSheet("QMainWindow {background: '#009900';}");
+        self.setStyleSheet("QMainWindow {background-image: url(background.png);}");
 
 
         #Title Font
