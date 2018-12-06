@@ -583,6 +583,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.matchLabel.resize(590, 50)
         self.matchLabel.move(30, 0)
         self.matchLabel.setFont(self.fontMatch)
+        self.matchLabel.setStyleSheet("QLabel {color: '#ffff00';}");
 
 
     #USERNAME LABELS
@@ -597,6 +598,8 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.usrlabelP1.resize(320, 20)
         self.usrlabelP1.move(30, 70)
         self.usrlabelP1.setFont(self.fontUsers)
+        self.usrlabelP1.setStyleSheet("QLabel {color: '#ffff00';}");
+
 
         self.usrlabelP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL USER 2 NAME FROM DATABASE
@@ -606,6 +609,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.usrlabelP2.resize(320, 20)
         self.usrlabelP2.move(380, 70)
         self.usrlabelP2.setFont(self.fontUsers)
+        self.usrlabelP2.setStyleSheet("QLabel {color: '#ffff00';}");
 
 
     #SCORELABELS
@@ -620,6 +624,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.scorelabelP1.resize(320, 20)
         self.scorelabelP1.move(130, 130)
         self.scorelabelP1.setFont(self.fontScores)
+        self.scorelabelP1.setStyleSheet("QLabel {color: '#ffff00';}");
 
         self.scorelabelP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL SCORE P2 NAME FROM DATABASE
@@ -628,6 +633,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.scorelabelP2.resize(320, 20)
         self.scorelabelP2.move(480, 130)
         self.scorelabelP2.setFont(self.fontScores)
+        self.scorelabelP2.setStyleSheet("QLabel {color: '#ffff00';}");
 
 
     #font for player positions
@@ -641,24 +647,29 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.QBlabelP1.resize(50, 20)
         self.QBlabelP1.move(30, 200)
         self.QBlabelP1.setFont(self.fontPosition)
+        self.QBlabelP1.setStyleSheet("QLabel {color: '#ffff00';}");
 
         self.RBlabelP1 = QtWidgets.QLabel(self)
         self.RBlabelP1.setText("RB")
         self.RBlabelP1.resize(50, 20)
         self.RBlabelP1.move(30, 275)
         self.RBlabelP1.setFont(self.fontPosition)
+        self.RBlabelP1.setStyleSheet("QLabel {color: '#ffff00';}");
+
 
         self.WRlabelP1 = QtWidgets.QLabel(self)
         self.WRlabelP1.setText("WR")
         self.WRlabelP1.resize(50, 20)
         self.WRlabelP1.move(30, 350)
         self.WRlabelP1.setFont(self.fontPosition)
+        self.WRlabelP1.setStyleSheet("QLabel {color: '#ffff00';}");
 
         self.KlabelP1 = QtWidgets.QLabel(self)
         self.KlabelP1.setText("K")
         self.KlabelP1.resize(50, 20)
         self.KlabelP1.move(30, 425)
         self.KlabelP1.setFont(self.fontPosition)
+        self.KlabelP1.setStyleSheet("QLabel {color: '#ffff00';}");
         '''
         self.DEFlabelP1 = QtWidgets.QLabel(self)
         self.DEFlabelP1.setText("DEF")
@@ -674,24 +685,28 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.QBlabelP2.resize(50, 20)
         self.QBlabelP2.move(380, 200)
         self.QBlabelP2.setFont(self.fontPosition)
+        self.QBlabelP2.setStyleSheet("QLabel {color: '#ffff00';}");
 
         self.RBlabelP2 = QtWidgets.QLabel(self)
         self.RBlabelP2.setText("RB")
         self.RBlabelP2.resize(50, 20)
         self.RBlabelP2.move(380, 275)
         self.RBlabelP2.setFont(self.fontPosition)
+        self.RBlabelP2.setStyleSheet("QLabel {color: '#ffff00';}");
 
         self.WRlabelP2 = QtWidgets.QLabel(self)
         self.WRlabelP2.setText("WR")
         self.WRlabelP2.resize(50, 20)
         self.WRlabelP2.move(380, 350)
         self.WRlabelP2.setFont(self.fontPosition)
+        self.WRlabelP2.setStyleSheet("QLabel {color: '#ffff00';}");
 
         self.KlabelP2 = QtWidgets.QLabel(self)
         self.KlabelP2.setText("K")
         self.KlabelP2.resize(50, 20)
         self.KlabelP2.move(380, 425)
         self.KlabelP2.setFont(self.fontPosition)
+        self.KlabelP2.setStyleSheet("QLabel {color: '#ffff00';}");   
         '''
         self.DEFlabelP2 = QtWidgets.QLabel(self)
         self.DEFlabelP2.setText("DEF")
@@ -717,6 +732,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.QBnameP1.resize(200, 20)
         self.QBnameP1.move(90, 200)
         self.QBnameP1.setFont(self.fontPlayerName)
+        self.QBnameP1.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.RBnameP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL RB P1 NAME FROM DATABASE
@@ -726,6 +742,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.RBnameP1.resize(200, 20)
         self.RBnameP1.move(90, 275)
         self.RBnameP1.setFont(self.fontPlayerName)
+        self.RBnameP1.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.WRnameP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL WR P1 NAME FROM DATABASE
@@ -735,6 +752,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.WRnameP1.resize(200, 20)
         self.WRnameP1.move(90, 350)
         self.WRnameP1.setFont(self.fontPlayerName)
+        self.WRnameP1.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.KnameP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL K P1 NAME FROM DATABASE
@@ -744,6 +762,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KnameP1.resize(200, 20)
         self.KnameP1.move(90, 425)
         self.KnameP1.setFont(self.fontPlayerName)
+        self.KnameP1.setStyleSheet("QLabel {color: '#ffff00';}");   
         '''
         self.DEFnameP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL DEF P1 NAME FROM DATABASE
@@ -764,6 +783,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.QBnameP2.resize(200, 20)
         self.QBnameP2.move(440, 200)
         self.QBnameP2.setFont(self.fontPlayerName)
+        self.QBnameP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.RBnameP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL RB P2 NAME FROM DATABASE
@@ -773,6 +793,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.RBnameP2.resize(200, 20)
         self.RBnameP2.move(440, 275)
         self.RBnameP2.setFont(self.fontPlayerName)
+        self.RBnameP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.WRnameP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL WR P2 NAME FROM DATABASE
@@ -782,6 +803,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.WRnameP2.resize(200, 20)
         self.WRnameP2.move(440, 350)
         self.WRnameP2.setFont(self.fontPlayerName)
+        self.WRnameP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.KnameP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL K P2 NAME FROM DATABASE
@@ -791,6 +813,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KnameP2.resize(200, 20)
         self.KnameP2.move(440, 425)
         self.KnameP2.setFont(self.fontPlayerName)
+        self.KnameP2.setStyleSheet("QLabel {color: '#ffff00';}");   
         '''
         self.DEFnameP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL DEF P2 NAME FROM DATABASE
@@ -814,6 +837,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.QBscoreP1.resize(60, 20)
         self.QBscoreP1.move(290, 200)
         self.QBscoreP1.setFont(self.fontPlayerScore)
+        self.QBscoreP1.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.RBscoreP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL RB P1 score FROM DATABASE
@@ -822,6 +846,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.RBscoreP1.resize(60, 20)
         self.RBscoreP1.move(290, 275)
         self.RBscoreP1.setFont(self.fontPlayerScore)
+        self.RBscoreP1.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.WRscoreP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL WR P1 score FROM DATABASE
@@ -830,6 +855,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.WRscoreP1.resize(60, 20)
         self.WRscoreP1.move(290, 350)
         self.WRscoreP1.setFont(self.fontPlayerScore)
+        self.WRscoreP1.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.KscoreP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL K P1 score FROM DATABASE
@@ -838,6 +864,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KscoreP1.resize(60, 20)
         self.KscoreP1.move(290, 425)
         self.KscoreP1.setFont(self.fontPlayerScore)
+        self.KscoreP1.setStyleSheet("QLabel {color: '#ffff00';}");   
         '''
         self.DEFscoreP1 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL DEF P1 score FROM DATABASE
@@ -855,6 +882,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.QBscoreP2.resize(60, 20)
         self.QBscoreP2.move(640, 200)
         self.QBscoreP2.setFont(self.fontPlayerScore)
+        self.QBscoreP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.RBscoreP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL RB P2 score FROM DATABASE
@@ -863,6 +891,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.RBscoreP2.resize(60, 20)
         self.RBscoreP2.move(640, 275)
         self.RBscoreP2.setFont(self.fontPlayerScore)
+        self.RBscoreP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.WRscoreP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL WR P2 score FROM DATABASE
@@ -871,6 +900,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.WRscoreP2.resize(60, 20)
         self.WRscoreP2.move(640, 350)
         self.WRscoreP2.setFont(self.fontPlayerScore)
+        self.WRscoreP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.KscoreP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL K P2 score FROM DATABASE
@@ -879,6 +909,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KscoreP2.resize(60, 20)
         self.KscoreP2.move(640, 425)
         self.KscoreP2.setFont(self.fontPlayerScore)
+        self.KscoreP2.setStyleSheet("QLabel {color: '#ffff00';}");   
         '''
         self.DEFscoreP2 = QtWidgets.QLabel(self)
         #RETRIEVE ACTUAL DEF P2 score FROM DATABASE
