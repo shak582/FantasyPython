@@ -308,6 +308,7 @@ def getScores():
 					scores2.append(x.kicking_xpmade)
 					scores2.append(x.kicking_fgm)
 			scores1.extend(scores2)
+			scores1 = list(map(str, scores1))
 			print(scores1)
 			return ' '.join(scores1)
 		except Exception as e:
