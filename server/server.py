@@ -259,7 +259,7 @@ def getplayers():
 			if m.player1 == t.player:
 				t2 = Team.query.filter_by(player=m.player2).first()
 			else:
-				t2 = Team.query.filter_by(playeyr=m.player1).first()
+				t2 = Team.query.filter_by(player=m.player1).first()
 			s = t.QB + ' ' + T.RB + ' ' + t.WR + ' ' + t.K
 			s += ' ' + t2.QB + ' ' + t2.RB + ' ' + t2.WR + ' ' + t2.K
 			return s
