@@ -437,7 +437,7 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
         if self.plyrsCmpltdDraft == 1:
             print("Next Players Turn")
         elif self.plyrsCmpltdDraft == 2:
-            print(Draft Complete)  
+            print("Draft Complete")  
             self.parent().setCurrentIndex(MATCH)
 
     def back_clicked(self):
