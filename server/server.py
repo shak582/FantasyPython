@@ -186,19 +186,18 @@ def addPlayer():
 
 @app.route('/isrosterfull', methods=['GET'])
 def isRosterFull():
-	req_data = request.get_json()
-	print req_data
 	if 'username' in session:
 		try:
 			t = Team.query.filter_by(player=session['username']).first()
+			print(t.QB,t.RB,t.WR,t.k)
 			if t.QB == None:
-				return 'false'
+				return 'QBfalse'
 			if t.RB == None:
-				return 'false'
+				return 'RBfalse'
 			if t.WR == None:
-				return 'false'
+				return 'WRfalse'
 			if t.K == None:
-				return 'false'
+				return 'Kfalse'
 			m = Match.query.filter_by(match=t.match).first()
 			m.state = m.state + 1
 			s.session.commit()
