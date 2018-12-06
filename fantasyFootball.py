@@ -423,7 +423,7 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
             headers = {'Content-type' : 'application/json'}
             r = s.post(url = 'http://162.243.35.210:5000/getlistplayers', headers=headers, data=json.dumps(self.lastName))
             print(r.text)
-            self.parent().setCurrentIndex(MATCH)
+            #self.parent().setCurrentIndex(MATCH)
         
         self.draftPlayerTextbox.setText("")
 
