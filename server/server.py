@@ -202,8 +202,8 @@ def isRosterFull():
 			m.state = m.state + 1
 			s.session.commit()
 			return 'true'
-		except Exception:
-			return 'false'
+		except Exception as e:
+			return e.args
 	return 'flase'
 
 
