@@ -198,8 +198,14 @@ def isRosterFull():
 			if t.K == None:
 				return 'Kfalse'
 			m = Match.query.filter_by(match=t.match).first()
-			m.state = m.state + 1
+
+			if 	session['username'] == m.player1 and m.state == 0:
+				m.state = m.state + 1
+			elif session['username'] == m.player2 and m.state == 1:
+				m.state = m.state + 1
 			db.session.commit()
+			if session['username'] == m.player2 and m. state == 0:
+				return 'false'
 			return 'true'
 		except Exception as e:
 			return str(e.args)
