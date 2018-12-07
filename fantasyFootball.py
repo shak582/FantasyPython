@@ -644,30 +644,31 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
         #font for player names
         self.fontPlayerName = QFont()
-        self.fontPlayerName.setPointSize(15)
+        self.fontPlayerName.setPointSize(16)
+        self.fontPlayerName.setBold(True)
 
 
     #p1 player names
         self.QBnameP1 = QtWidgets.QLabel(self)
-        self.QBnameP1.resize(180, 20)
+        self.QBnameP1.resize(160, 20)
         self.QBnameP1.move(90, 200)
         self.QBnameP1.setFont(self.fontPlayerName)
         self.QBnameP1.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.RBnameP1 = QtWidgets.QLabel(self)
-        self.RBnameP1.resize(180, 20)
+        self.RBnameP1.resize(160, 20)
         self.RBnameP1.move(90, 275)
         self.RBnameP1.setFont(self.fontPlayerName)
         self.RBnameP1.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.WRnameP1 = QtWidgets.QLabel(self)
-        self.WRnameP1.resize(180, 20)
+        self.WRnameP1.resize(160, 20)
         self.WRnameP1.move(90, 350)
         self.WRnameP1.setFont(self.fontPlayerName)
         self.WRnameP1.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.KnameP1 = QtWidgets.QLabel(self)
-        self.KnameP1.resize(180, 20)
+        self.KnameP1.resize(160, 20)
         self.KnameP1.move(90, 425)
         self.KnameP1.setFont(self.fontPlayerName)
         self.KnameP1.setStyleSheet("QLabel {color: '#ffff00';}");   
@@ -676,25 +677,25 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
     #p2 player names
         self.QBnameP2 = QtWidgets.QLabel(self)
-        self.QBnameP2.resize(180, 20)
+        self.QBnameP2.resize(160, 20)
         self.QBnameP2.move(440, 200)
         self.QBnameP2.setFont(self.fontPlayerName)
         self.QBnameP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.RBnameP2 = QtWidgets.QLabel(self)
-        self.RBnameP2.resize(180, 20)
+        self.RBnameP2.resize(160, 20)
         self.RBnameP2.move(440, 275)
         self.RBnameP2.setFont(self.fontPlayerName)
         self.RBnameP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.WRnameP2 = QtWidgets.QLabel(self)
-        self.WRnameP2.resize(180, 20)
+        self.WRnameP2.resize(160, 20)
         self.WRnameP2.move(440, 350)
         self.WRnameP2.setFont(self.fontPlayerName)
         self.WRnameP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.KnameP2 = QtWidgets.QLabel(self)
-        self.KnameP2.resize(180, 20)
+        self.KnameP2.resize(160, 20)
         self.KnameP2.move(440, 425)
         self.KnameP2.setFont(self.fontPlayerName)
         self.KnameP2.setStyleSheet("QLabel {color: '#ffff00';}");   
@@ -703,55 +704,56 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
     #font for player scores
         self.fontPlayerScore = QFont()
-        self.fontPlayerScore.setPointSize(12)
+        self.fontPlayerScore.setPointSize(14)
+        self.fontPlayerScore.setBold(True)
 
     #p1 player scores
         self.QBscoreP1 = QtWidgets.QLabel(self)
-        self.QBscoreP1.resize(70, 20)
-        self.QBscoreP1.move(280, 200)
+        self.QBscoreP1.resize(90, 20)
+        self.QBscoreP1.move(260, 200)
         self.QBscoreP1.setFont(self.fontPlayerScore)
         self.QBscoreP1.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.RBscoreP1 = QtWidgets.QLabel(self)
-        self.RBscoreP1.resize(70, 20)
-        self.RBscoreP1.move(280, 275)
+        self.RBscoreP1.resize(90, 20)
+        self.RBscoreP1.move(260, 275)
         self.RBscoreP1.setFont(self.fontPlayerScore)
         self.RBscoreP1.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.WRscoreP1 = QtWidgets.QLabel(self)
-        self.WRscoreP1.resize(70, 20)
-        self.WRscoreP1.move(280, 350)
+        self.WRscoreP1.resize(90, 20)
+        self.WRscoreP1.move(260, 350)
         self.WRscoreP1.setFont(self.fontPlayerScore)
         self.WRscoreP1.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.KscoreP1 = QtWidgets.QLabel(self)
-        self.KscoreP1.resize(70, 20)
-        self.KscoreP1.move(280, 425)
+        self.KscoreP1.resize(90, 20)
+        self.KscoreP1.move(260, 425)
         self.KscoreP1.setFont(self.fontPlayerScore)
         self.KscoreP1.setStyleSheet("QLabel {color: '#ffff00';}");   
 
     #p2 player scores
         self.QBscoreP2 = QtWidgets.QLabel(self)
-        self.QBscoreP2.resize(70, 20)
-        self.QBscoreP2.move(630, 200)
+        self.QBscoreP2.resize(90, 20)
+        self.QBscoreP2.move(610, 200)
         self.QBscoreP2.setFont(self.fontPlayerScore)
         self.QBscoreP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.RBscoreP2 = QtWidgets.QLabel(self)
-        self.RBscoreP2.resize(70, 20)
-        self.RBscoreP2.move(630, 275)
+        self.RBscoreP2.resize(90, 20)
+        self.RBscoreP2.move(610, 275)
         self.RBscoreP2.setFont(self.fontPlayerScore)
         self.RBscoreP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.WRscoreP2 = QtWidgets.QLabel(self)
-        self.WRscoreP2.resize(70, 20)
-        self.WRscoreP2.move(630, 350)
+        self.WRscoreP2.resize(90, 20)
+        self.WRscoreP2.move(610, 350)
         self.WRscoreP2.setFont(self.fontPlayerScore)
         self.WRscoreP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.KscoreP2 = QtWidgets.QLabel(self)
-        self.KscoreP2.resize(70, 20)
-        self.KscoreP2.move(630, 425)
+        self.KscoreP2.resize(90, 20)
+        self.KscoreP2.move(610, 425)
         self.KscoreP2.setFont(self.fontPlayerScore)
         self.KscoreP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
