@@ -323,7 +323,7 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
     def current_click(self):
         self.matchOrDraft = s.get(url= 'http://162.243.35.210:5000/isdraftover')
         self.matchOrDraft = int(self.matchOrDraft.text)
-        if self.matchOrDraft.text == 2:
+        if self.matchOrDraft == 2:
             self.parent().setCurrentIndex(MATCH)
         else:
             self.parent().setCurrentIndex(DRAFT)
