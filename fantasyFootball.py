@@ -496,9 +496,7 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
             self.rosterFull_error.setWindowTitle("Error")
             self.rosterFull_error.setText("Roster Is Not Full")
             self.rosterFull_error.show()
-            #REMOVE
-            self.parent().setCurrentIndex(MATCH)
-
+            
         if self.plyrsCmpltdDraft == 1:
             self.oneCmpltdDraft = QMessageBox()
             self.oneCmpltdDraft.resize(50,50)
@@ -513,6 +511,8 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
             self.twoCmpltdDraft.setWindowTitle("Success")
             self.twoCmpltdDraft.setText("P2 Picks Are In!\nDraft Complete!")
             self.twoCmpltdDraft.show()
+            self.parent().setCurrentIndex(MATCH)
+        elif self.plyrsCmpltdDraft > 2:
             #REMOVE
             self.parent().setCurrentIndex(MATCH)
 
