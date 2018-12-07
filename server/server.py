@@ -256,11 +256,9 @@ def getplayers():
 		try:
 			t = Team.query.filter_by(player=session['username']).first()
 			m = Match.query.filter_by(match=t.match).first()
-			if m.player1 == t.player:
-				t2 = Team.query.filter_by(player=m.player2).first()
-			else:
-				t2 = Team.query.filter_by(player=m.player1).first()
-			s = t.QB + ' ' + t.RB + ' ' + t.WR + ' ' + t.K
+			t1 = Team.query.filter_by(player=m.player1).first()
+			t2 = Team.query.filter_by(player=m.player2).first()
+			s = t1.QB + ' ' + t1.RB + ' ' + t1.WR + ' ' + t1.K
 			s += ' ' + t2.QB + ' ' + t2.RB + ' ' + t2.WR + ' ' + t2.K
 			return s
 		except Exception as e:
@@ -273,35 +271,33 @@ def getScores():
 		try:
 			t = Team.query.filter_by(player=session['username']).first()
 			m = Match.query.filter_by(match=t.match).first()
-			if m.player1 == t.player:
-				t2 = Team.query.filter_by(player=m.player2).first()
-			else:
-				t2 = Team.query.filter_by(player=m.player1).first()
+			t1 = Team.query.filter_by(player=m.player1).first()
+			t2 = Team.query.filter_by(player=m.player2).first()
 			scores1 = []
 			scores2 = []
 			for x in passing:
-				if t.QB == str(x):
+				if t1.QB == str(x):
 					scores1.append(x.passing_yds)
 					scores1.append(x.passing_tds)
 				if t2.QB == str(x):
 					scores2.append(x.passing_yds)
 					scores2.append(x.passing_tds)
 			for x in rushing:
-				if t.RB == str(x):
+				if t1.RB == str(x):
 					scores1.append(x.rushing_yds)
 					scores1.append(x.receiving_tds)
 				if t2.RB == str(x):
 					scores2.append(x.rushing_yds)
 					scores2.append(x.receiving_tds)
 			for x in receiver:
-				if t.WR == str(x):
+				if t1.WR == str(x):
 					scores1.append(x.receiving_yds)
 					scores1.append(x.receiving_tds)
 				if t2.WR == str(x):
 					scores2.append(x.receiving_yds)
 					scores2.append(x.receiving_tds)
 			for x in kicking:
-				if t.K == str(x):
+				if t1.K == str(x):
 					scores1.append(x.kicking_xpmade)
 					scores1.append(x.kicking_fgm)
 				if t2.K == str(x):
