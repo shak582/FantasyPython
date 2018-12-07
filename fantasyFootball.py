@@ -41,7 +41,6 @@ class MainWindow(QtWidgets.QMainWindow):  # Main Window
         #self.setStyleSheet("QMainWindow {background-image: url(background.png);}");
         self.setStyleSheet("QMainWindow {background-image: url(matchBackground.jpeg);}");
 
-
         #Title Font
         self.fontTitle = QFont()
         self.fontTitle.setBold(True)
@@ -76,7 +75,6 @@ class MainWindow(QtWidgets.QMainWindow):  # Main Window
 
         self.setCentralWidget(self.PageStack)
         self.show()
-
 
 # To change between Pages - self.parent().setCurrentIndex(HOME)
 #          Changes depending on what you want to switch to ^
@@ -152,7 +150,6 @@ class LoginWidget(QtWidgets.QWidget): # Login Widget to login user
     def login_back_click(self):
         self.parent().setCurrentIndex(LOGIN_REGISTER)
 
- 
     def login_click(self):
         self.Login_Username = self.loginUserTextbox.text()
         self.Login_Password = self.loginPassTextbox.text()
@@ -173,9 +170,7 @@ class LoginWidget(QtWidgets.QWidget): # Login Widget to login user
                 self.login_error.show()
 
             self.loginUserTextbox.setText("")
-            self.loginPassTextbox.setText("")
-    
-
+            self.loginPassTextbox.setText("")    
 
 class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
     def __init__(self, parent):
@@ -226,7 +221,6 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
             self.regUsrPassDict = {'username' : self.Register_Username, 'password' : self.Register_Password}
             headers = {'Content-type' : 'application/json'}
             r = s.post(url = url, headers=headers, data=json.dumps(self.regUsrPassDict))
-
         
         #error box for if user already exists
         if r.text == "error":
@@ -241,8 +235,6 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
 
         self.regUserTextbox.setText("")
         self.regPassTextbox.setText("")
-
-
 
 class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
     def __init__(self, parent):
@@ -309,8 +301,6 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
                 self.matchJoined.show()
                 self.parent().setCurrentIndex(HOME)
 
-
-
         self.matchlist = MatchList()
         self.matchlist.show()
 
@@ -321,8 +311,7 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
             self.parent().setCurrentIndex(MATCH)
         else:
             self.parent().setCurrentIndex(DRAFT)
-
-        
+   
     def logout_click(self):
         s.get(url='http://162.243.35.210:5000/exit')
         self.logout_success = QMessageBox()
@@ -331,8 +320,7 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
         self.logout_success.setWindowTitle("Success")
         self.logout_success.setText("Logout Succesful")
         self.logout_success.show()
-        self.parent().setCurrentIndex(LOGIN_REGISTER)
-        
+        self.parent().setCurrentIndex(LOGIN_REGISTER)     
 
 class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
     def __init__(self, parent):
@@ -347,7 +335,6 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.createMatchTextbox = QLineEdit(self)
         self.createMatchTextbox.setFixedSize(280,40)
         self.createMatchTextbox.setPlaceholderText("Create New Match Title")
-
 
         # Create a button in the window
         self.createMatchBtn = QPushButton('Create Match', self)
@@ -384,8 +371,6 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
             self.matchCreated.setText("Match Created!")
             self.matchCreated.show()
             self.parent().setCurrentIndex(HOME)
-
-
         
         self.createMatchTextbox.setText("")
         self.Create_Match_Title = ""
@@ -440,7 +425,6 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
             r = s.post(url = 'http://162.243.35.210:5000/getlistplayers', headers=headers, data=json.dumps(self.lastName))
         
         self.draftPlayerTextbox.setText("")
-
 
         class PlayerList(QListWidget):
             def __init__(self):
@@ -519,7 +503,6 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.matchLabel.setFont(self.fontMatch)
         self.matchLabel.setStyleSheet("QLabel {color: '#ffff00';}");
 
-
     #USERNAME LABELS
         self.fontUsers = QFont()
         self.fontUsers.setPointSize(18)
@@ -554,7 +537,6 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.scorelabelP2.setFont(self.fontScores)
         self.scorelabelP2.setStyleSheet("QLabel {color: '#ffff00';}");
 
-
         #font for player positions
         self.fontPosition = QFont()
         self.fontPosition.setBold(True)
@@ -575,7 +557,6 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.RBlabelP1.setFont(self.fontPosition)
         self.RBlabelP1.setStyleSheet("QLabel {color: '#ffff00';}");
 
-
         self.WRlabelP1 = QtWidgets.QLabel(self)
         self.WRlabelP1.setText("WR")
         self.WRlabelP1.resize(50, 20)
@@ -589,7 +570,6 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KlabelP1.move(30, 425)
         self.KlabelP1.setFont(self.fontPosition)
         self.KlabelP1.setStyleSheet("QLabel {color: '#ffff00';}");
-
 
     #p2 position labels
         self.QBlabelP2 = QtWidgets.QLabel(self)
@@ -620,12 +600,10 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KlabelP2.setFont(self.fontPosition)
         self.KlabelP2.setStyleSheet("QLabel {color: '#ffff00';}"); 
 
-
         #font for player names
         self.fontPlayerName = QFont()
         self.fontPlayerName.setPointSize(16)
         self.fontPlayerName.setBold(True)
-
 
     #p1 player names
         self.QBnameP1 = QtWidgets.QLabel(self)
@@ -652,8 +630,6 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KnameP1.setFont(self.fontPlayerName)
         self.KnameP1.setStyleSheet("QLabel {color: '#ffff00';}");   
 
-
-
     #p2 player names
         self.QBnameP2 = QtWidgets.QLabel(self)
         self.QBnameP2.resize(160, 20)
@@ -679,8 +655,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KnameP2.setFont(self.fontPlayerName)
         self.KnameP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
-
-    #font for player scores
+        #font for player scores
         self.fontPlayerScore = QFont()
         self.fontPlayerScore.setPointSize(14)
         self.fontPlayerScore.setBold(True)
@@ -760,7 +735,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KP1fg=int(self.playerStats[7])
         self.KP1score = self.KP1extraPts/1 + self.KP1fg*3
 
-        self.scoreP1= Decimal(self.QBP1score + self.RBP1score + self.WRP1score + self.KP1score) #+ self.DEFP1score
+        self.scoreP1= Decimal(self.QBP1score + self.RBP1score + self.WRP1score + self.KP1score)
         self.scoreP1 = round(self.scoreP1, 2)
 
     #calculate p2 scores
@@ -783,7 +758,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KP2fg=int(self.playerStats[15])
         self.KP2score = self.KP2extraPts/1 + self.KP2fg*3
 
-        self.scoreP2= Decimal(self.QBP2score + self.RBP2score + self.WRP2score + self.KP2score) #+ self.DEFP2score
+        self.scoreP2= Decimal(self.QBP2score + self.RBP2score + self.WRP2score + self.KP2score)
         self.scoreP2 = round(self.scoreP2, 2)
 
         #RETRIEVE ACTUAL MATCH NAME FROM DATABASE
