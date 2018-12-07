@@ -546,15 +546,15 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.fontUsers.setPointSize(18)
 
         self.usrlabelP1 = QtWidgets.QLabel(self)
-        self.usrlabelP1.resize(320, 20)
-        self.usrlabelP1.move(30, 70)
+        self.usrlabelP1.resize(320, 25)
+        self.usrlabelP1.move(30, 66)
         self.usrlabelP1.setFont(self.fontUsers)
         self.usrlabelP1.setStyleSheet("QLabel {color: '#ffff00';}");
 
 
         self.usrlabelP2 = QtWidgets.QLabel(self)
-        self.usrlabelP2.resize(320, 20)
-        self.usrlabelP2.move(380, 70)
+        self.usrlabelP2.resize(320, 25)
+        self.usrlabelP2.move(380, 66)
         self.usrlabelP2.setFont(self.fontUsers)
         self.usrlabelP2.setStyleSheet("QLabel {color: '#ffff00';}");
 
