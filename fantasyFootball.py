@@ -234,7 +234,6 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
             headers = {'Content-type' : 'application/json'}
             r = s.post(url = url, headers=headers, data=json.dumps(self.regUsrPassDict))
             print(r.text)
-            self.parent().setCurrentIndex(LOGIN_REGISTER)
         
         #error box for if user already exists
         if r.text == "error":
@@ -244,6 +243,8 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
             self.regError.setWindowTitle("Error")
             self.regError.setText("User Already Exists")
             self.regError.show()
+        else:
+            self.parent().setCurrentIndex(LOGIN_REGISTER)
 
         self.regUserTextbox.setText("")
         self.regPassTextbox.setText("")
