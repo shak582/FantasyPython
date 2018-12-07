@@ -156,9 +156,6 @@ class LoginWidget(QtWidgets.QWidget): # Login Widget to login user
     def login_click(self):
         self.Login_Username = self.loginUserTextbox.text()
         self.Login_Password = self.loginPassTextbox.text()
-
-        # By passing database checking REMEMBER TO REMOVE
-        #self.parent().setCurrentIndex(HOME)
         
         if self.Login_Username != "" and self.Login_Password != "":
             self.loginUsrPassDict = {'username': self.Login_Username, 'password': self.Login_Password}
@@ -224,9 +221,6 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
     def register_click(self):
         self.Register_Username = self.regUserTextbox.text()
         self.Register_Password = self.regPassTextbox.text()
-
-        # By passing database checking REMEBER TO REMOVE
-        #self.parent().setCurrentIndex(LOGIN_REGISTER)
         
         if self.Register_Username!=None and self.Register_Password !=None:
             self.regUsrPassDict = {'username' : self.Register_Username, 'password' : self.Register_Password}
