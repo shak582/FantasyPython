@@ -39,7 +39,7 @@ class MainWindow(QtWidgets.QMainWindow):  # Main Window
         self.setWindowTitle("Hardcore Fantasy Football")
         #self.setStyleSheet("QMainWindow {background: '#009900';}");
         #self.setStyleSheet("QMainWindow {background-image: url(background.png);}");
-        self.parent().setStyleSheet("QMainWindow {background-image: url(matchBackground.jpeg);}");
+        self.setStyleSheet("QMainWindow {background-image: url(matchBackground.jpeg);}");
 
 
         #Title Font
