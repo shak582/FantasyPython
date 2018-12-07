@@ -38,7 +38,8 @@ class MainWindow(QtWidgets.QMainWindow):  # Main Window
         self.setFixedSize(700, 700)  # eliminating resizing
         self.setWindowTitle("Hardcore Fantasy Football")
         #self.setStyleSheet("QMainWindow {background: '#009900';}");
-        self.setStyleSheet("QMainWindow {background-image: url(background.png);}");
+        #self.setStyleSheet("QMainWindow {background-image: url(background.png);}");
+        self.parent().setStyleSheet("QMainWindow {background-image: url(matchBackground.jpeg);}");
 
 
         #Title Font
@@ -47,7 +48,7 @@ class MainWindow(QtWidgets.QMainWindow):  # Main Window
         self.fontTitle.setPointSize(35)
 
         self.titleLabel = QtWidgets.QLabel(self)
-        self.titleLabel.setText("Hardcore\nFantasy\nFootball")
+        #self.titleLabel.setText("Hardcore\nFantasy\nFootball")
         self.titleLabel.resize(590, 150)
         self.titleLabel.move(260, 75)
         self.titleLabel.setFont(self.fontTitle)
@@ -496,7 +497,7 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
             self.rosterFull_error.setText("Roster Is Not Full")
             self.rosterFull_error.show()
             #REMOVE
-            #self.parent().setCurrentIndex(MATCH)
+            self.parent().setCurrentIndex(MATCH)
 
         if self.plyrsCmpltdDraft == 1:
             self.oneCmpltdDraft = QMessageBox()
@@ -759,7 +760,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
     #def showEvent(self, event):
     #def matchStats(self):
     def showEvent(self, event):
-        self.parent().setStyleSheet("QMainWindow {background-image: url(matchBackground.jpeg);}");
+        #self.parent().setStyleSheet("QMainWindow {background-image: url(matchBackground.jpeg);}");
         #Necessary
         #self.parent().titleLabel.setText("")
         self.playerStats = s.get(url= 'http://162.243.35.210:5000/getscores')
