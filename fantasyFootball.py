@@ -237,6 +237,13 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
             self.parent().setCurrentIndex(LOGIN_REGISTER)
         
         #error box for if user already exists
+        if r.text != "error":
+            r = QMessageBox()
+            r.resize(50,50)
+            r.move(80,320)
+            r.setWindowTitle("Error")
+            r.setText("User Already Exists")
+            r.show()
 
         self.regUserTextbox.setText("")
         self.regPassTextbox.setText("")
