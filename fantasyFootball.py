@@ -156,7 +156,6 @@ class LoginWidget(QtWidgets.QWidget): # Login Widget to login user
     def login_click(self):
         self.Login_Username = self.loginUserTextbox.text()
         self.Login_Password = self.loginPassTextbox.text()
-        print(self.Login_Username)
 
         # By passing database checking REMEMBER TO REMOVE
         #self.parent().setCurrentIndex(HOME)
@@ -165,7 +164,7 @@ class LoginWidget(QtWidgets.QWidget): # Login Widget to login user
             self.loginUsrPassDict = {'username': self.Login_Username, 'password': self.Login_Password}
             headers = {'Content-type': 'application/json'}
             r = s.post(url = url1, headers=headers, data=json.dumps(self.loginUsrPassDict))
-            print(r.text)
+
             if r.text == "success":
                 self.parent().setCurrentIndex(HOME)
             else:
@@ -233,7 +232,7 @@ class RegisterWidget(QtWidgets.QWidget): # RegisterWidget for registering user
             self.regUsrPassDict = {'username' : self.Register_Username, 'password' : self.Register_Password}
             headers = {'Content-type' : 'application/json'}
             r = s.post(url = url, headers=headers, data=json.dumps(self.regUsrPassDict))
-            print(r.text)
+
         
         #error box for if user already exists
         if r.text == "error":
@@ -322,27 +321,12 @@ class HomeWidget(QtWidgets.QWidget): # HomeWidget for joining, creating match
         self.matchlist.show()
 
     def current_click(self):
-        #if draft is NOT complete:
-        self.parent().setCurrentIndex(DRAFT)
-        #if draft is complete:
-        #self.parent().setCurrentIndex(MATCH)
+        self.matchOrDraft = s.get(url= 'http://162.243.35.210:5000/isdraftover')
+        if self.matchOrDraft == 2:
+            self.parent().setCurrentIndex(MATCH)
+        else:
+            self.parent().setCurrentIndex(DRAFT)
 
-        '''
-        class MatchList(QListWidget):
-            def __init__(self):
-                QListWidget.__init__(self)
-                self.add_matches()
-                self.itemClicked.connect(self.match_click)
-
-            def add_matches(self):
-                self.match_text_list = s.get(url= 'http://162.243.35.210:5000/getmymatches')
-                for match_text in self.match_text_list.text.split('\n'):
-                    match = QListWidgetItem(match_text)
-                    self.addItem(match)
-
-            def match_click(self, match):
-                print (str(match.text()))
-            '''
         
     def logout_click(self):
         s.get(url='http://162.243.35.210:5000/exit')
@@ -398,7 +382,6 @@ class CreateWidget(QtWidgets.QWidget):  # CreateWidget for creating match
             self.matchTitle = {'match' : self.Create_Match_Title}
             headers = {'Content-type' : 'application/json'}
             r = s.post(url = url3, headers=headers, data=json.dumps(self.matchTitle))
-            print(r.text)
             self.matchCreated = QMessageBox()
             self.matchCreated.resize(50,50)
             self.matchCreated.move(80,320)
@@ -460,12 +443,10 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
             self.lastName = {'player' : self.draftedPlayer}
             headers = {'Content-type' : 'application/json'}
             r = s.post(url = 'http://162.243.35.210:5000/getlistplayers', headers=headers, data=json.dumps(self.lastName))
-            print(r.text)
-            #self.parent().setCurrentIndex(MATCH)
         
         self.draftPlayerTextbox.setText("")
 
-        # if self.draftedPlayer != ""
+
         class PlayerList(QListWidget):
             def __init__(self):
                 QListWidget.__init__(self)
@@ -495,7 +476,6 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
         self.isRosterFull = s.get(url= 'http://162.243.35.210:5000/isrosterfull')
         self.plyrsCmpltdDraft = s.get(url= 'http://162.243.35.210:5000/isdraftover')
         self.plyrsCmpltdDraft = int(self.plyrsCmpltdDraft.text)
-        print(self.isRosterFull.text)
 
         if self.isRosterFull.text != "true":
             self.rosterFull_error = QMessageBox()
@@ -519,9 +499,6 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
             self.twoCmpltdDraft.setWindowTitle("Success")
             self.twoCmpltdDraft.setText("P2 Picks Are In!\nDraft Complete!")
             self.twoCmpltdDraft.show()
-            self.parent().setCurrentIndex(MATCH)
-        elif self.plyrsCmpltdDraft > 2:
-            #REMOVE
             self.parent().setCurrentIndex(MATCH)
 
     def back_clicked(self):
@@ -775,7 +752,6 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         #self.parent().titleLabel.setText("")
         self.playerStats = s.get(url= 'http://162.243.35.210:5000/getscores')
         self.playerStats = self.playerStats.text.split()
-        print(self.playerStats)
 
     #calculate p1 scores
         #UPDATE ALL PLAYER STATS WITH API (self.statistic = int(string statistic from API))
@@ -857,7 +833,6 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
         self.playerNames = s.get(url= 'http://162.243.35.210:5000/getplayers')
         self.playerNames = self.playerNames.text.split()
-        print(self.playerNames)
 
 
         #RETRIEVE ACTUAL QB P1 NAME FROM DATABASE
