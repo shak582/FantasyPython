@@ -765,20 +765,20 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
     #calculate p1 scores
         #UPDATE ALL PLAYER STATS WITH API (self.statistic = int(string statistic from API))
-        self.QBP1passYds=int(playerStats[0])
-        self.QBP1touchdwns=int(playerStats[1])
+        self.QBP1passYds=int(self.playerStats[0])
+        self.QBP1touchdwns=int(self.playerStats[1])
         self.QBP1score = self.QBP1passYds/20 + self.QBP1touchdwns*6
 
-        self.RBP1rushYds=int(playerStats[2])
-        self.RBP1touchdwns=int(playerStats[3])
+        self.RBP1rushYds=int(self.playerStats[2])
+        self.RBP1touchdwns=int(self.playerStats[3])
         self.RBP1score = self.RBP1rushYds/10 + self.RBP1touchdwns*6
 
-        self.WRP1passYds=int(layerStats[4])
-        self.WRP1touchdwns=int(playerStats[5])
+        self.WRP1passYds=int(self.playerStats[4])
+        self.WRP1touchdwns=int(self.playerStats[5])
         self.WRP1score = self.WRP1passYds/10 + self.WRP1touchdwns*6
 
-        self.KP1extraPts=int(playerStats[6])
-        self.KP1fg=int(playerStats[7])
+        self.KP1extraPts=int(self.playerStats[6])
+        self.KP1fg=int(self.playerStats[7])
         self.KP1score = self.KP1extraPts/1 + self.KP1fg*3
 
         #find what def statistics are on API
@@ -789,21 +789,21 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
     #calculate p2 scores
 
         #UPDATE ALL PLAYER STATS WITH API (self.statistic = int(string statistic from API))
-        self.QBP2passYds=int(playerStats[8])
-        self.QBP2touchdwns=int(playerStats[9])
+        self.QBP2passYds=int(self.playerStats[8])
+        self.QBP2touchdwns=int(self.playerStats[9])
 
         self.QBP2score = self.QBP2passYds/20 + self.QBP2touchdwns*6
 
-        self.RBP2rushYds=int(playerStats[10])
-        self.RBP2touchdwns=int(playerStats[11])
+        self.RBP2rushYds=int(self.playerStats[10])
+        self.RBP2touchdwns=int(self.playerStats[11])
         self.RBP2score = self.RBP2rushYds/10 + self.RBP2touchdwns*6
 
-        self.WRP2passYds=int(playerStats[12])
-        self.WRP2touchdwns=int(playerStats[13])
+        self.WRP2passYds=int(self.playerStats[12])
+        self.WRP2touchdwns=int(self.playerStats[13])
         self.WRP2score = self.WRP2passYds/10 + self.WRP2touchdwns*6
 
-        self.KP2extraPts=int(playerStats[14])
-        self.KP2fg=int(playerStats[15])
+        self.KP2extraPts=int(self.playerStats[14])
+        self.KP2fg=int(self.playerStats[15])
         self.KP2score = self.KP2extraPts/1 + self.KP2fg*3
 
         #find what def statistics are on API
