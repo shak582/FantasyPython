@@ -5,6 +5,7 @@ from PyQt5 import QtWidgets, QtGui, QtWidgets
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
+from decimal import Decimal
 
 LOGIN_REGISTER = 0
 HOME = 1
@@ -37,7 +38,6 @@ class MainWindow(QtWidgets.QMainWindow):  # Main Window
         self.setGeometry(0, 0, 700, 700)
         self.setFixedSize(700, 700)  # eliminating resizing
         self.setWindowTitle("Hardcore Fantasy Football")
-        #self.setStyleSheet("QMainWindow {background: '#009900';}");
         #self.setStyleSheet("QMainWindow {background-image: url(background.png);}");
         self.setStyleSheet("QMainWindow {background-image: url(matchBackground.jpeg);}");
 
@@ -473,7 +473,6 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
         #REMOVE
         #self.parent().setCurrentIndex(MATCH)
 
-
         self.isRosterFull = s.get(url= 'http://162.243.35.210:5000/isrosterfull')
         self.plyrsCmpltdDraft = s.get(url= 'http://162.243.35.210:5000/isdraftover')
         self.plyrsCmpltdDraft = int(self.plyrsCmpltdDraft.text)
@@ -687,7 +686,6 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KnameP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
 
-
     #font for player scores
         self.fontPlayerScore = QFont()
         self.fontPlayerScore.setPointSize(14)
@@ -743,13 +741,9 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KscoreP2.setFont(self.fontPlayerScore)
         self.KscoreP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
-        #self.matchStats()
-
-    #def showEvent(self, event):
-    #def matchStats(self):
     def showEvent(self, event):
-        #self.parent().setStyleSheet("QMainWindow {background-image: url(matchBackground.jpeg);}");
         #Necessary
+        #self.parent().setStyleSheet("QMainWindow {background-image: url(matchBackground.jpeg);}");
         #self.parent().titleLabel.setText("")
         self.playerStats = s.get(url= 'http://162.243.35.210:5000/getscores')
         self.playerStats = self.playerStats.text.split()
@@ -772,10 +766,8 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KP1fg=int(self.playerStats[7])
         self.KP1score = self.KP1extraPts/1 + self.KP1fg*3
 
-        #find what def statistics are on API
-        #self.DEFP1score = 6.0
-
-        self.scoreP1= self.QBP1score + self.RBP1score + self.WRP1score + self.KP1score #+ self.DEFP1score
+        self.scoreP1= Decimal(self.QBP1score + self.RBP1score + self.WRP1score + self.KP1score) #+ self.DEFP1score
+        self.scoreP1 = round(self.scoreP1, 2)
 
     #calculate p2 scores
 
@@ -797,14 +789,8 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KP2fg=int(self.playerStats[15])
         self.KP2score = self.KP2extraPts/1 + self.KP2fg*3
 
-        #find what def statistics are on API
-        #self.DEFP2score = 4.0
-
-        self.scoreP2= self.QBP2score + self.RBP2score + self.WRP2score + self.KP2score #+ self.DEFP2score
-
-    
-
-        ####
+        self.scoreP2= Decimal(self.QBP2score + self.RBP2score + self.WRP2score + self.KP2score) #+ self.DEFP2score
+        self.scoreP2 = round(self.scoreP2, 2)
 
         #RETRIEVE ACTUAL MATCH NAME FROM DATABASE
         self.matchName = s.get(url= 'http://162.243.35.210:5000/getmatch')
@@ -821,25 +807,20 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.user2Name = self.user2Name.text
         self.usrlabelP2.setText(self.user2Name)
 
-
         #RETRIEVE ACTUAL SCORE P1 NAME FROM DATABASE
-        self.scoreP1Str = str(self.scoreP1)
+        self.scoreP1Str = str(self.scoreP1) + " pts"
         self.scorelabelP1.setText(self.scoreP1Str)
 
-
         #RETRIEVE ACTUAL SCORE P2 NAME FROM DATABASE
-        self.scoreP2Str = str(self.scoreP2)
+        self.scoreP2Str = str(self.scoreP2) + " pts"
         self.scorelabelP2.setText(self.scoreP2Str)
-
 
         self.playerNames = s.get(url= 'http://162.243.35.210:5000/getplayers')
         self.playerNames = self.playerNames.text.split()
 
-
         #RETRIEVE ACTUAL QB P1 NAME FROM DATABASE
         self.playerNames[0]
         self.QBnameP1.setText(self.playerNames[0])
-
 
         #RETRIEVE ACTUAL RB P1 NAME FROM DATABASE
         self.playerNames[1]
@@ -853,21 +834,17 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.playerNames[3]
         self.KnameP1.setText(self.playerNames[3])
 
-
         #RETRIEVE ACTUAL QB P2 NAME FROM DATABASE
         self.playerNames[4]
         self.QBnameP2.setText(self.playerNames[4])
-
 
         #RETRIEVE ACTUAL RB P2 NAME FROM DATABASE
         self.playerNames[5]
         self.RBnameP2.setText(self.playerNames[5])
 
-
         #RETRIEVE ACTUAL WR P2 NAME FROM DATABASE
         self.playerNames[6]
         self.WRnameP2.setText(self.playerNames[6])
-
 
         #RETRIEVE ACTUAL K P2 NAME FROM DATABASE
         self.playerNames[7]
@@ -897,7 +874,6 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.RBP2scoreStr = str(self.RBP2score) + " pts"
         self.RBscoreP2.setText(self.RBP2scoreStr)
 
-
         #RETRIEVE ACTUAL WR P2 score FROM DATABASE
         self.WRP2scoreStr = str(self.WRP2score) + " pts"
         self.WRscoreP2.setText(self.WRP2scoreStr)
@@ -905,8 +881,6 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         #RETRIEVE ACTUAL K P2 score FROM DATABASE
         self.KP2scoreStr = str(self.KP2score) + " pts"
         self.KscoreP2.setText(self.KP2scoreStr)
-        ########
-
 
     def goHome_clicked(self):
         self.parent().setCurrentIndex(HOME)
