@@ -644,7 +644,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
         #font for player names
         self.fontPlayerName = QFont()
-        self.fontPlayerName.setPointSize(11)
+        self.fontPlayerName.setPointSize(13)
 
 
     #p1 player names
@@ -703,7 +703,7 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
     #font for player scores
         self.fontPlayerScore = QFont()
-        self.fontPlayerScore.setPointSize(10)
+        self.fontPlayerScore.setPointSize(12)
 
     #p1 player scores
         self.QBscoreP1 = QtWidgets.QLabel(self)
