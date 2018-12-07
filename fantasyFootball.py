@@ -479,6 +479,10 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
 
 
     def finishDraft_clicked(self):
+        #REMOVE
+        #self.parent().setCurrentIndex(MATCH)
+
+
         self.isRosterFull = s.get(url= 'http://162.243.35.210:5000/isrosterfull')
         self.plyrsCmpltdDraft = s.get(url= 'http://162.243.35.210:5000/isdraftover')
         self.plyrsCmpltdDraft = int(self.plyrsCmpltdDraft.text)
@@ -514,76 +518,19 @@ class DraftWidget(QtWidgets.QWidget):  # DraftWidget for drafting
 class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
     def __init__(self, parent):
         QtWidgets.QWidget.__init__(self, parent)
-        #self.matchStats()
 
-    def matchStats(self):
-        self.parent().setStyleSheet("QMainWindow {background-image: url(matchBackground.jpeg);}");
-        #Necessary
-        #self.parent().titleLabel.setText("")
-
-    #Return Home Button
+        #Return Home Button
         self.goHome_button = QtWidgets.QPushButton("Go Home", self)
         self.goHome_button.setFixedSize(75, 40)
         self.goHome_button.move(620, 5)
         self.goHome_button.clicked.connect(self.goHome_clicked)
-    #calculate p1 scores
-        #UPDATE ALL PLAYER STATS WITH API (self.statistic = int(string statistic from API))
-        self.QBP1passYds=303
-        self.QBP1touchdwns=4
-        self.QBP1score = self.QBP1passYds/20 + self.QBP1touchdwns*6
 
-        self.RBP1rushYds=97
-        self.RBP1touchdwns=2
-        self.RBP1score = self.RBP1rushYds/10 + self.RBP1touchdwns*6
-
-        self.WRP1passYds=67
-        self.WRP1touchdwns=1
-        self.WRP1score = self.WRP1passYds/10 + self.WRP1touchdwns*6
-
-        self.KP1extraPts=4
-        self.KP1fg=1
-        self.KP1score = self.KP1extraPts/1 + self.KP1fg*3
-
-        #find what def statistics are on API
-        #self.DEFP1score = 6.0
-
-        self.scoreP1= self.QBP1score + self.RBP1score + self.WRP1score + self.KP1score #+ self.DEFP1score
-
-    #calculate p2 scores
-
-        #UPDATE ALL PLAYER STATS WITH API (self.statistic = int(string statistic from API))
-        self.QBP2passYds=400
-        self.QBP2touchdwns=3
-
-        self.QBP2score = self.QBP2passYds/20 + self.QBP2touchdwns*6
-
-        self.RBP2rushYds=120
-        self.RBP2touchdwns=0
-        self.RBP2score = self.RBP2rushYds/10 + self.RBP2touchdwns*6
-
-        self.WRP2passYds=153
-        self.WRP2touchdwns=2
-        self.WRP2score = self.WRP2passYds/10 + self.WRP2touchdwns*6
-
-        self.KP2extraPts=1
-        self.KP2fg=2
-        self.KP2score = self.KP2extraPts/1 + self.KP2fg*3
-
-        #find what def statistics are on API
-        #self.DEFP2score = 4.0
-
-        self.scoreP2= self.QBP2score + self.RBP2score + self.WRP2score + self.KP2score #+ self.DEFP2score
-
-    #Match Label
+        #Match Label
         self.fontMatch = QFont()
         self.fontMatch.setBold(True)
         self.fontMatch.setPointSize(20)
 
         self.matchLabel = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL MATCH NAME FROM DATABASE
-        self.matchName = s.get(url= 'http://162.243.35.210:5000/getmatch')
-        self.matchName = self.matchName.text
-        self.matchLabel.setText(self.matchName)
         self.matchLabel.resize(590, 50)
         self.matchLabel.move(30, 0)
         self.matchLabel.setFont(self.fontMatch)
@@ -595,10 +542,6 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.fontUsers.setPointSize(18)
 
         self.usrlabelP1 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL USER 1 NAME FROM DATABASE
-        self.user1Name = s.get(url= 'http://162.243.35.210:5000/getplayer1')
-        self.user1Name = self.user1Name.text
-        self.usrlabelP1.setText(self.user1Name)
         self.usrlabelP1.resize(320, 20)
         self.usrlabelP1.move(30, 70)
         self.usrlabelP1.setFont(self.fontUsers)
@@ -606,15 +549,10 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
 
         self.usrlabelP2 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL USER 2 NAME FROM DATABASE
-        self.user2Name = s.get(url= 'http://162.243.35.210:5000/getplayer2')
-        self.user2Name = self.user2Name.text
-        self.usrlabelP2.setText(self.user2Name)
         self.usrlabelP2.resize(320, 20)
         self.usrlabelP2.move(380, 70)
         self.usrlabelP2.setFont(self.fontUsers)
         self.usrlabelP2.setStyleSheet("QLabel {color: '#ffff00';}");
-
 
     #SCORELABELS
         self.fontScores = QFont()
@@ -622,25 +560,19 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.fontScores.setPointSize(18)
 
         self.scorelabelP1 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL SCORE P1 NAME FROM DATABASE
-        self.scoreP1Str = str(self.scoreP1)
-        self.scorelabelP1.setText(self.scoreP1Str)
         self.scorelabelP1.resize(320, 20)
         self.scorelabelP1.move(130, 130)
         self.scorelabelP1.setFont(self.fontScores)
         self.scorelabelP1.setStyleSheet("QLabel {color: '#ffff00';}");
 
         self.scorelabelP2 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL SCORE P2 NAME FROM DATABASE
-        self.scoreP2Str = str(self.scoreP2)
-        self.scorelabelP2.setText(self.scoreP2Str)
         self.scorelabelP2.resize(320, 20)
         self.scorelabelP2.move(480, 130)
         self.scorelabelP2.setFont(self.fontScores)
         self.scorelabelP2.setStyleSheet("QLabel {color: '#ffff00';}");
 
 
-    #font for player positions
+        #font for player positions
         self.fontPosition = QFont()
         self.fontPosition.setBold(True)
         self.fontPosition.setPointSize(14)
@@ -674,13 +606,6 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KlabelP1.move(30, 425)
         self.KlabelP1.setFont(self.fontPosition)
         self.KlabelP1.setStyleSheet("QLabel {color: '#ffff00';}");
-        '''
-        self.DEFlabelP1 = QtWidgets.QLabel(self)
-        self.DEFlabelP1.setText("DEF")
-        self.DEFlabelP1.resize(50, 20)
-        self.DEFlabelP1.move(30, 500)
-        self.DEFlabelP1.setFont(self.fontPosition)
-        '''
 
 
     #p2 position labels
@@ -710,123 +635,66 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
         self.KlabelP2.resize(50, 20)
         self.KlabelP2.move(380, 425)
         self.KlabelP2.setFont(self.fontPosition)
-        self.KlabelP2.setStyleSheet("QLabel {color: '#ffff00';}");   
-        '''
-        self.DEFlabelP2 = QtWidgets.QLabel(self)
-        self.DEFlabelP2.setText("DEF")
-        self.DEFlabelP2.resize(50, 20)
-        self.DEFlabelP2.move(380, 500)
-        self.DEFlabelP2.setFont(self.fontPosition)
-        '''
+        self.KlabelP2.setStyleSheet("QLabel {color: '#ffff00';}"); 
 
-    #font for player names
+
+        #font for player names
         self.fontPlayerName = QFont()
         self.fontPlayerName.setPointSize(11)
 
-        self.playerNames = s.get(url= 'http://162.243.35.210:5000/getplayers')
-        self.playerNames = self.playerNames.text.split()
-        print(self.playerNames)
 
     #p1 player names
         self.QBnameP1 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL QB P1 NAME FROM DATABASE
-        #self.QBP1 = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
-        #self.playerNames[0]
-        self.QBnameP1.setText(self.playerNames[0])
         self.QBnameP1.resize(200, 20)
         self.QBnameP1.move(90, 200)
         self.QBnameP1.setFont(self.fontPlayerName)
         self.QBnameP1.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.RBnameP1 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL RB P1 NAME FROM DATABASE
-        #self.RBP1 = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
-        #self.playerNames[1]
-        self.RBnameP1.setText(self.playerNames[1])
         self.RBnameP1.resize(200, 20)
         self.RBnameP1.move(90, 275)
         self.RBnameP1.setFont(self.fontPlayerName)
         self.RBnameP1.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.WRnameP1 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL WR P1 NAME FROM DATABASE
-        #self.WRP1 = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
-        #self.playerNames[2]
-        self.WRnameP1.setText(self.playerNames[2])
         self.WRnameP1.resize(200, 20)
         self.WRnameP1.move(90, 350)
         self.WRnameP1.setFont(self.fontPlayerName)
         self.WRnameP1.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.KnameP1 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL K P1 NAME FROM DATABASE
-        #self.KP1 = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
-        #self.playerNames[3]
-        self.KnameP1.setText(self.playerNames[3])
         self.KnameP1.resize(200, 20)
         self.KnameP1.move(90, 425)
         self.KnameP1.setFont(self.fontPlayerName)
         self.KnameP1.setStyleSheet("QLabel {color: '#ffff00';}");   
-        '''
-        self.DEFnameP1 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL DEF P1 NAME FROM DATABASE
-        #self.DEFP1 = s.get(url= 'http://162.243.35.210:5000/$$$$$$$')
-        self.DEFnameP1.setText("Dolphins")
-        self.DEFnameP1.resize(200, 20)
-        self.DEFnameP1.move(90, 500)
-        self.DEFnameP1.setFont(self.fontPlayerName)
-        '''
+
 
 
     #p2 player names
         self.QBnameP2 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL QB P2 NAME FROM DATABASE
-        #self.QBP2 = string
-        #self.playerNames[4]
-        self.QBnameP2.setText(self.playerNames[4])
         self.QBnameP2.resize(200, 20)
         self.QBnameP2.move(440, 200)
         self.QBnameP2.setFont(self.fontPlayerName)
         self.QBnameP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.RBnameP2 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL RB P2 NAME FROM DATABASE
-        #self.RBP2 = string
-        #self.playerNames[5]
-        self.RBnameP2.setText(self.playerNames[5])
         self.RBnameP2.resize(200, 20)
         self.RBnameP2.move(440, 275)
         self.RBnameP2.setFont(self.fontPlayerName)
         self.RBnameP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.WRnameP2 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL WR P2 NAME FROM DATABASE
-        #self.WRP2 = string
-        #self.playerNames[6]
-        self.WRnameP2.setText(self.playerNames[6])
         self.WRnameP2.resize(200, 20)
         self.WRnameP2.move(440, 350)
         self.WRnameP2.setFont(self.fontPlayerName)
         self.WRnameP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.KnameP2 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL K P2 NAME FROM DATABASE
-        #self.KP2 = string
-        #self.playerNames[7]
-        self.KnameP2.setText(self.playerNames[7])
         self.KnameP2.resize(200, 20)
         self.KnameP2.move(440, 425)
         self.KnameP2.setFont(self.fontPlayerName)
         self.KnameP2.setStyleSheet("QLabel {color: '#ffff00';}");   
-        '''
-        self.DEFnameP2 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL DEF P2 NAME FROM DATABASE
-        #self.DEFP2 = string
-        self.DEFnameP2.setText("Saints")
-        self.DEFnameP2.resize(200, 20)
-        self.DEFnameP2.move(440, 500)
-        self.DEFnameP2.setFont(self.fontPlayerName)
-        '''
+
 
 
     #font for player scores
@@ -835,100 +703,229 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
     #p1 player scores
         self.QBscoreP1 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL QB P1 score FROM DATABASE
-        self.QBP1scoreStr = str(self.QBP1score) + " pts"
-        self.QBscoreP1.setText(self.QBP1scoreStr)
         self.QBscoreP1.resize(60, 20)
         self.QBscoreP1.move(290, 200)
         self.QBscoreP1.setFont(self.fontPlayerScore)
         self.QBscoreP1.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.RBscoreP1 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL RB P1 score FROM DATABASE
-        self.RBP1scoreStr = str(self.RBP1score) + " pts"
-        self.RBscoreP1.setText(self.RBP1scoreStr)
         self.RBscoreP1.resize(60, 20)
         self.RBscoreP1.move(290, 275)
         self.RBscoreP1.setFont(self.fontPlayerScore)
         self.RBscoreP1.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.WRscoreP1 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL WR P1 score FROM DATABASE
-        self.WRP1scoreStr = str(self.WRP1score) + " pts"
-        self.WRscoreP1.setText(self.WRP1scoreStr)
         self.WRscoreP1.resize(60, 20)
         self.WRscoreP1.move(290, 350)
         self.WRscoreP1.setFont(self.fontPlayerScore)
         self.WRscoreP1.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.KscoreP1 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL K P1 score FROM DATABASE
-        self.KP1scoreStr = str(self.KP1score) + " pts"
-        self.KscoreP1.setText(self.KP1scoreStr)
         self.KscoreP1.resize(60, 20)
         self.KscoreP1.move(290, 425)
         self.KscoreP1.setFont(self.fontPlayerScore)
         self.KscoreP1.setStyleSheet("QLabel {color: '#ffff00';}");   
-        '''
-        self.DEFscoreP1 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL DEF P1 score FROM DATABASE
-        self.DEFP1scoreStr = str(self.DEFP1score) + " pts"
-        self.DEFscoreP1.setText(self.DEFP1scoreStr)
-        self.DEFscoreP1.resize(60, 20)
-        self.DEFscoreP1.move(290, 500)
-        self.DEFscoreP1.setFont(self.fontPlayerScore)
-        '''
+
     #p2 player scores
         self.QBscoreP2 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL QB P2 score FROM DATABASE
-        self.QBP2scoreStr = str(self.QBP2score) + " pts"
-        self.QBscoreP2.setText(self.QBP2scoreStr)
         self.QBscoreP2.resize(60, 20)
         self.QBscoreP2.move(640, 200)
         self.QBscoreP2.setFont(self.fontPlayerScore)
         self.QBscoreP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.RBscoreP2 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL RB P2 score FROM DATABASE
-        self.RBP2scoreStr = str(self.RBP2score) + " pts"
-        self.RBscoreP2.setText(self.RBP2scoreStr)
         self.RBscoreP2.resize(60, 20)
         self.RBscoreP2.move(640, 275)
         self.RBscoreP2.setFont(self.fontPlayerScore)
         self.RBscoreP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.WRscoreP2 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL WR P2 score FROM DATABASE
-        self.WRP2scoreStr = str(self.WRP2score) + " pts"
-        self.WRscoreP2.setText(self.WRP2scoreStr)
         self.WRscoreP2.resize(60, 20)
         self.WRscoreP2.move(640, 350)
         self.WRscoreP2.setFont(self.fontPlayerScore)
         self.WRscoreP2.setStyleSheet("QLabel {color: '#ffff00';}");   
 
         self.KscoreP2 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL K P2 score FROM DATABASE
-        self.KP2scoreStr = str(self.KP2score) + " pts"
-        self.KscoreP2.setText(self.KP2scoreStr)
         self.KscoreP2.resize(60, 20)
         self.KscoreP2.move(640, 425)
         self.KscoreP2.setFont(self.fontPlayerScore)
         self.KscoreP2.setStyleSheet("QLabel {color: '#ffff00';}");   
-        '''
-        self.DEFscoreP2 = QtWidgets.QLabel(self)
-        #RETRIEVE ACTUAL DEF P2 score FROM DATABASE
-        self.DEFP2scoreStr = str(self.DEFP2score) + " pts"
-        self.DEFscoreP2.setText(self.DEFP2scoreStr)
-        self.DEFscoreP2.resize(60, 20)
-        self.DEFscoreP2.move(640, 500)
-        self.DEFscoreP2.setFont(self.fontPlayerScore)
-        '''
+
+        #self.matchStats()
+
+    #def showEvent(self, event):
+    #def matchStats(self):
+    def showEvent(self, event):
+        self.parent().setStyleSheet("QMainWindow {background-image: url(matchBackground.jpeg);}");
+        #Necessary
+        #self.parent().titleLabel.setText("")
+        self.playerStats = s.get(url= 'http://162.243.35.210:5000/getscores')
+        self.playerStats = self.playerStats.text.split()
+        print(self.playerStats)
+
+    #calculate p1 scores
+        #UPDATE ALL PLAYER STATS WITH API (self.statistic = int(string statistic from API))
+        self.QBP1passYds=int(playerStats[0])
+        self.QBP1touchdwns=int(playerStats[1])
+        self.QBP1score = self.QBP1passYds/20 + self.QBP1touchdwns*6
+
+        self.RBP1rushYds=int(playerStats[2])
+        self.RBP1touchdwns=int(playerStats[3])
+        self.RBP1score = self.RBP1rushYds/10 + self.RBP1touchdwns*6
+
+        self.WRP1passYds=int(layerStats[4])
+        self.WRP1touchdwns=int(playerStats[5])
+        self.WRP1score = self.WRP1passYds/10 + self.WRP1touchdwns*6
+
+        self.KP1extraPts=int(playerStats[6])
+        self.KP1fg=int(playerStats[7])
+        self.KP1score = self.KP1extraPts/1 + self.KP1fg*3
+
+        #find what def statistics are on API
+        #self.DEFP1score = 6.0
+
+        self.scoreP1= self.QBP1score + self.RBP1score + self.WRP1score + self.KP1score #+ self.DEFP1score
+
+    #calculate p2 scores
+
+        #UPDATE ALL PLAYER STATS WITH API (self.statistic = int(string statistic from API))
+        self.QBP2passYds=int(playerStats[8])
+        self.QBP2touchdwns=int(playerStats[9])
+
+        self.QBP2score = self.QBP2passYds/20 + self.QBP2touchdwns*6
+
+        self.RBP2rushYds=int(playerStats[10])
+        self.RBP2touchdwns=int(playerStats[11])
+        self.RBP2score = self.RBP2rushYds/10 + self.RBP2touchdwns*6
+
+        self.WRP2passYds=int(playerStats[12])
+        self.WRP2touchdwns=int(playerStats[13])
+        self.WRP2score = self.WRP2passYds/10 + self.WRP2touchdwns*6
+
+        self.KP2extraPts=int(playerStats[14])
+        self.KP2fg=int(playerStats[15])
+        self.KP2score = self.KP2extraPts/1 + self.KP2fg*3
+
+        #find what def statistics are on API
+        #self.DEFP2score = 4.0
+
+        self.scoreP2= self.QBP2score + self.RBP2score + self.WRP2score + self.KP2score #+ self.DEFP2score
+
+    
+
+        ####
+
+        #RETRIEVE ACTUAL MATCH NAME FROM DATABASE
+        self.matchName = s.get(url= 'http://162.243.35.210:5000/getmatch')
+        self.matchName = self.matchName.text
+        self.matchLabel.setText(self.matchName)
+
+        #RETRIEVE ACTUAL USER 1 NAME FROM DATABASE
+        self.user1Name = s.get(url= 'http://162.243.35.210:5000/getplayer1')
+        self.user1Name = self.user1Name.text
+        self.usrlabelP1.setText(self.user1Name)
+
+        #RETRIEVE ACTUAL USER 2 NAME FROM DATABASE
+        self.user2Name = s.get(url= 'http://162.243.35.210:5000/getplayer2')
+        self.user2Name = self.user2Name.text
+        self.usrlabelP2.setText(self.user2Name)
+
+
+        #RETRIEVE ACTUAL SCORE P1 NAME FROM DATABASE
+        self.scoreP1Str = str(self.scoreP1)
+        self.scorelabelP1.setText(self.scoreP1Str)
+
+
+        #RETRIEVE ACTUAL SCORE P2 NAME FROM DATABASE
+        self.scoreP2Str = str(self.scoreP2)
+        self.scorelabelP2.setText(self.scoreP2Str)
+
+
+        self.playerNames = s.get(url= 'http://162.243.35.210:5000/getplayers')
+        self.playerNames = self.playerNames.text.split()
+        print(self.playerNames)
+
+
+        #RETRIEVE ACTUAL QB P1 NAME FROM DATABASE
+        self.playerNames[0]
+        self.QBnameP1.setText(self.playerNames[0])
+
+
+        #RETRIEVE ACTUAL RB P1 NAME FROM DATABASE
+        self.playerNames[1]
+        self.RBnameP1.setText(self.playerNames[1])
+
+        #RETRIEVE ACTUAL WR P1 NAME FROM DATABASE
+        self.playerNames[2]
+        self.WRnameP1.setText(self.playerNames[2])
+
+        #RETRIEVE ACTUAL K P1 NAME FROM DATABASE
+        self.playerNames[3]
+        self.KnameP1.setText(self.playerNames[3])
+
+
+        #RETRIEVE ACTUAL QB P2 NAME FROM DATABASE
+        self.QBP2 = string
+        self.playerNames[4]
+        self.QBnameP2.setText(self.playerNames[4])
+
+
+        #RETRIEVE ACTUAL RB P2 NAME FROM DATABASE
+        self.RBP2 = string
+        self.playerNames[5]
+        self.RBnameP2.setText(self.playerNames[5])
+
+
+        #RETRIEVE ACTUAL WR P2 NAME FROM DATABASE
+        self.WRP2 = string
+        self.playerNames[6]
+        self.WRnameP2.setText(self.playerNames[6])
+
+
+        #RETRIEVE ACTUAL K P2 NAME FROM DATABASE
+        self.KP2 = string
+        self.playerNames[7]
+        self.KnameP2.setText(self.playerNames[7])
+
+        #RETRIEVE ACTUAL QB P1 score FROM DATABASE
+        self.QBP1scoreStr = str(self.QBP1score) + " pts"
+        self.QBscoreP1.setText(self.QBP1scoreStr)
+
+        #RETRIEVE ACTUAL RB P1 score FROM DATABASE
+        self.RBP1scoreStr = str(self.RBP1score) + " pts"
+        self.RBscoreP1.setText(self.RBP1scoreStr)
+
+        #RETRIEVE ACTUAL WR P1 score FROM DATABASE
+        self.WRP1scoreStr = str(self.WRP1score) + " pts"
+        self.WRscoreP1.setText(self.WRP1scoreStr)
+
+        #RETRIEVE ACTUAL K P1 score FROM DATABASE
+        self.KP1scoreStr = str(self.KP1score) + " pts"
+        self.KscoreP1.setText(self.KP1scoreStr)
+
+        #RETRIEVE ACTUAL QB P2 score FROM DATABASE
+        self.QBP2scoreStr = str(self.QBP2score) + " pts"
+        self.QBscoreP2.setText(self.QBP2scoreStr)
+
+        #RETRIEVE ACTUAL RB P2 score FROM DATABASE
+        self.RBP2scoreStr = str(self.RBP2score) + " pts"
+        self.RBscoreP2.setText(self.RBP2scoreStr)
+
+
+        #RETRIEVE ACTUAL WR P2 score FROM DATABASE
+        self.WRP2scoreStr = str(self.WRP2score) + " pts"
+        self.WRscoreP2.setText(self.WRP2scoreStr)
+
+        #RETRIEVE ACTUAL K P2 score FROM DATABASE
+        self.KP2scoreStr = str(self.KP2score) + " pts"
+        self.KscoreP2.setText(self.KP2scoreStr)
+        ########
+
 
     def goHome_clicked(self):
         self.parent().setCurrentIndex(HOME)
 
     def paintEvent(self, event):
-        self.matchStats()
         qp = QtGui.QPainter()
         qp.begin(self)
         pen = qp.pen()
