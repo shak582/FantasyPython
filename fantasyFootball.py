@@ -868,25 +868,21 @@ class MatchWidget(QtWidgets.QWidget):  # CreateWidget for creating match
 
 
         #RETRIEVE ACTUAL QB P2 NAME FROM DATABASE
-        self.QBP2 = string
         self.playerNames[4]
         self.QBnameP2.setText(self.playerNames[4])
 
 
         #RETRIEVE ACTUAL RB P2 NAME FROM DATABASE
-        self.RBP2 = string
         self.playerNames[5]
         self.RBnameP2.setText(self.playerNames[5])
 
 
         #RETRIEVE ACTUAL WR P2 NAME FROM DATABASE
-        self.WRP2 = string
         self.playerNames[6]
         self.WRnameP2.setText(self.playerNames[6])
 
 
         #RETRIEVE ACTUAL K P2 NAME FROM DATABASE
-        self.KP2 = string
         self.playerNames[7]
         self.KnameP2.setText(self.playerNames[7])
 
